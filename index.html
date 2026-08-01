@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build It Up — Coming Soon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bu-black: #000000;
+    --bu-green: #1F895F;
+    --bu-red: #BC2C31;
+    --bu-white: #FFFFFF;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    background: var(--bu-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', -apple-system, 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  h1 {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #9a9a9a;
+    font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+    line-height: 1.1;
+    margin-top: 26px;
+    text-transform: uppercase;
+  }
+
+  .logo {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: clamp(3rem, 10vw, 7rem);
+  }
+
+  .logo .black { color: var(--bu-black); }
+  .logo .green { color: var(--bu-green); }
+  .logo .red { color: var(--bu-red); }
+
+  p.contact {
+    margin-top: 22px;
+    font-weight: 600;
+    font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+    color: var(--bu-black);
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo"><span class="black">Build </span><span class="green">I</span><span class="red">t</span><span class="black"> Up</span></div>
+    <h1>Coming Back Soon</h1>
+    <p class="contact">Contact: info@builditup.it</p>
+  </div>
+</body>
+</html>
