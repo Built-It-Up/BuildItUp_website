@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build It Up — A team that builds alongside your startup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bu-black: #000000;
+    --bu-green: #1F895F;
+    --bu-red: #BC2C31;
+    --bu-white: #FFFFFF;
+    --bu-offwhite: #F5F5F0;
+    --bu-green-mint: #E7F3EC;
+    --bu-green-mint-dark: #DCEFE5;
+    --bu-gray: #6B6B6B;
+    --bu-gray-light: #9A9A9A;
+    --bu-border: #E7E5DF;
+    --radius-lg: 28px;
+    --radius-md: 20px;
+    --radius-pill: 999px;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Poppins', -apple-system, 'Segoe UI', sans-serif;
+    color: var(--bu-black);
+    background: var(--bu-white);
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    color: var(--bu-green);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-green {
+    background: var(--bu-green);
+    color: var(--bu-white);
+  }
+
+  .btn-green:hover {
+    background: #17724c;
+  }
+
+  .btn-outline-green {
+    background: transparent;
+    color: var(--bu-green);
+    border-color: var(--bu-green);
+  }
+
+  .btn-outline-green:hover {
+    background: var(--bu-green);
+    color: var(--bu-white);
+  }
+
+  .btn-red {
+    background: var(--bu-red);
+    color: var(--bu-white);
+  }
+
+  .btn-red:hover {
+    background: #9c2529;
+  }
+
+  .btn-sm {
+    padding: 10px 22px;
+    font-size: 0.85rem;
+  }
+
+  /* Logo */
+  .logo {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: 1.5rem;
+  }
+
+  .logo .black { color: var(--bu-black); }
+  .logo .green { color: var(--bu-green); }
+  .logo .red { color: var(--bu-red); }
+
+  .logo.on-dark .black { color: var(--bu-white); }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bu-white);
+    border-bottom: 1px solid var(--bu-border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--bu-black);
+    padding-bottom: 6px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--bu-green);
+  }
+
+  .nav-links a.active {
+    color: var(--bu-green);
+    border-bottom-color: var(--bu-green);
+    font-weight: 600;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--bu-offwhite);
+    padding: 100px 24px 110px;
+    text-align: center;
+  }
+
+  .hero .container {
+    max-width: 940px;
+  }
+
+  .hero h1 {
+    margin-top: 22px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    font-size: clamp(2.6rem, 6.4vw, 5.6rem);
+    color: var(--bu-black);
+  }
+
+  .hero p.lead {
+    max-width: 640px;
+    margin: 28px auto 0;
+    color: var(--bu-gray);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .hero .cta-row {
+    margin-top: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* Stats bar */
+  .stats {
+    background: var(--bu-black);
+    color: var(--bu-white);
+    padding: 64px 24px;
+  }
+
+  .stats .container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-weight: 800;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    margin-top: 10px;
+    color: #B9B9B9;
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+
+  /* Section headers */
+  .section {
+    padding: 100px 24px;
+  }
+
+  .section.offwhite {
+    background: var(--bu-offwhite);
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 56px;
+  }
+
+  .section-head.left {
+    text-align: left;
+    margin: 0 0 48px;
+    max-width: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .section-head h2 {
+    margin-top: 14px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+    color: var(--bu-black);
+  }
+
+  .section-head p {
+    margin-top: 16px;
+    color: var(--bu-gray);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .see-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--bu-black);
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .see-more span {
+    transition: transform 0.15s ease;
+    display: inline-block;
+  }
+
+  .see-more:hover span {
+    transform: translateX(4px);
+  }
+
+  /* Offer cards */
+  .offer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .offer-card {
+    background: var(--bu-white);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  }
+
+  .offer-card:last-child {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 12px);
+  }
+
+  .offer-num {
+    color: var(--bu-green);
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+  }
+
+  .offer-card h3 {
+    margin-top: 14px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--bu-black);
+  }
+
+  .offer-card p {
+    margin-top: 12px;
+    color: var(--bu-gray);
+    line-height: 1.6;
+    font-size: 0.98rem;
+  }
+
+  /* Case studies */
+  .case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .case-card {
+    background: var(--bu-white);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    border: 1px solid var(--bu-border);
+  }
+
+  .case-badge {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--bu-green-mint);
+    color: var(--bu-green);
+    font-weight: 800;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .case-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .case-name-row {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .case-name-row h3 {
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+
+  .pill-amount {
+    background: var(--bu-green-mint);
+    color: var(--bu-green);
+    font-weight: 700;
+    font-size: 0.78rem;
+    padding: 5px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  .case-sub {
+    margin-top: 6px;
+    color: var(--bu-gray-light);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .case-desc {
+    margin-top: 14px;
+    color: var(--bu-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Quote */
+  .quote-section {
+    background: var(--bu-green-mint);
+    padding: 110px 24px;
+    text-align: center;
+  }
+
+  .quote-section .container {
+    max-width: 820px;
+  }
+
+  .quote-text {
+    font-weight: 700;
+    color: var(--bu-black);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+  }
+
+  .quote-author {
+    margin-top: 32px;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+
+  .quote-role {
+    margin-top: 4px;
+    color: var(--bu-gray);
+    font-size: 0.9rem;
+  }
+
+  /* Partners */
+  .partner-eyebrow {
+    display: block;
+    text-align: center;
+    color: var(--bu-gray-light);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+
+  .partner-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .partner-logo {
+    width: 140px;
+    height: 64px;
+    border-radius: var(--radius-md);
+    background: var(--bu-white);
+    border: 1px solid var(--bu-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bu-gray-light);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* Newsletter */
+  .newsletter {
+    background: var(--bu-green);
+    padding: 90px 24px;
+    text-align: center;
+  }
+
+  .newsletter h2 {
+    color: var(--bu-white);
+    font-weight: 800;
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+    letter-spacing: -0.02em;
+  }
+
+  .newsletter p {
+    margin-top: 16px;
+    color: var(--bu-green-mint);
+    font-size: 1.05rem;
+  }
+
+  .newsletter-form {
+    margin-top: 36px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .newsletter-form input {
+    font-family: inherit;
+    border: none;
+    outline: none;
+    border-radius: var(--radius-pill);
+    padding: 14px 24px;
+    font-size: 0.95rem;
+    width: 320px;
+    max-width: 100%;
+    background: var(--bu-white);
+    color: var(--bu-black);
+  }
+
+  .newsletter-form input::placeholder {
+    color: var(--bu-gray-light);
+  }
+
+  /* Footer */
+  footer {
+    background: var(--bu-black);
+    color: var(--bu-white);
+    padding: 80px 24px 32px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-tagline {
+    margin-top: 16px;
+    color: #B9B9B9;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--bu-white);
+    margin-bottom: 18px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-col a {
+    color: #B9B9B9;
+    font-size: 0.95rem;
+    transition: color 0.15s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--bu-white);
+  }
+
+  .footer-divider {
+    margin: 56px 0 24px;
+    height: 1px;
+    background: #262626;
+    border: none;
+  }
+
+  .footer-bottom {
+    color: #8A8A8A;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .nav-links {
+      display: none;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .offer-grid,
+    .case-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .offer-card:last-child {
+      max-width: none;
+    }
+
+    .stats .container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+
+    .section-head.left {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo"><span class="black">Build </span><span class="green">I</span><span class="red">t</span><span class="black"> Up</span></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#offer">Program</a></li>
+          <li><a href="#case-studies">Events &amp; Ecosystem</a></li>
+          <li><a href="#partners">Team</a></li>
+          <li><a href="#newsletter">Contact</a></li>
+        </ul>
+        <a href="#" class="btn btn-green btn-sm">Apply now</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">Fractional Founder's Associate</span>
+      <h1>A team that builds<br>alongside your startup</h1>
+      <p class="lead">Not advisors from the outside, but students embedded in your growth — working hands-on on the projects that move the needle. A network of students, founders and investors since 2012.</p>
+      <div class="cta-row">
+        <a href="#" class="btn btn-green">Apply to the program</a>
+        <a href="#" class="btn btn-outline-green">Become a partner</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section class="stats">
+    <div class="container">
+      <div>
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Startups supported</div>
+      </div>
+      <div>
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Alumni entrepreneurs &amp; investors</div>
+      </div>
+      <div>
+        <div class="stat-number">2012</div>
+        <div class="stat-label">Founded within ESCP</div>
+      </div>
+      <div>
+        <div class="stat-number">Free</div>
+        <div class="stat-label">Program cost to startups</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSA OFFRIAMO -->
+  <section class="section offwhite" id="offer">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What we bring to the table</span>
+        <h2>One team, five levers of growth</h2>
+        <p>From automation to fundraising, our teams work across the levers that unlock your next stage of growth.</p>
+      </div>
+      <div class="offer-grid">
+        <div class="offer-card">
+          <div class="offer-num">01</div>
+          <h3>Process Automation</h3>
+          <p>Support on automating operational and commercial processes to boost efficiency and cut manual work.</p>
+        </div>
+        <div class="offer-card">
+          <div class="offer-num">02</div>
+          <h3>Go-To-Market</h3>
+          <p>Identifying target segments, validating through commercial proof-of-concepts and designing launch channels.</p>
+        </div>
+        <div class="offer-card">
+          <div class="offer-num">03</div>
+          <h3>Fundraising Services</h3>
+          <p>Investor mapping, support through deals and connections to our network of angels and VCs.</p>
+        </div>
+        <div class="offer-card">
+          <div class="offer-num">04</div>
+          <h3>Strategic Materials &amp; Pitch Decks</h3>
+          <p>Creating and reviewing presentations and tools for communicating with partners and investors.</p>
+        </div>
+        <div class="offer-card">
+          <div class="offer-num">05</div>
+          <h3>Outreach</h3>
+          <p>Lead generation and outreach to identify new opportunities for the sales process.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section class="section" id="case-studies">
+    <div class="container">
+      <div class="section-head left">
+        <div>
+          <span class="eyebrow">Case studies</span>
+          <h2>Startups we've walked alongside</h2>
+        </div>
+        <a href="#" class="see-more">See the case studies <span>→</span></a>
+      </div>
+      <div class="case-grid">
+        <div class="case-card">
+          <div class="case-top">
+            <div class="case-badge">C</div>
+          </div>
+          <div class="case-name-row">
+            <h3>Compri</h3>
+            <span class="pill-amount">€5M</span>
+          </div>
+          <div class="case-sub">AI &amp; SaaS · Seed</div>
+          <p class="case-desc">AI-native procurement platform automating purchasing and sales workflows.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-top">
+            <div class="case-badge">T</div>
+          </div>
+          <div class="case-name-row">
+            <h3>Tensive</h3>
+            <span class="pill-amount">€22.7M</span>
+          </div>
+          <div class="case-sub">MedTech · Series A</div>
+          <p class="case-desc">Biodegradable implants for post-mastectomy breast reconstruction.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-top">
+            <div class="case-badge">G</div>
+          </div>
+          <div class="case-name-row">
+            <h3>Galeio</h3>
+            <span class="pill-amount">Station F</span>
+          </div>
+          <div class="case-sub">Deep-Tech · Paris</div>
+          <p class="case-desc">Turns satellite imagery into geospatial intelligence for insurance, energy and infrastructure.</p>
+        </div>
+        <div class="case-card">
+          <div class="case-top">
+            <div class="case-badge">R</div>
+          </div>
+          <div class="case-name-row">
+            <h3>Rosso</h3>
+            <span class="pill-amount">€3M</span>
+          </div>
+          <div class="case-sub">HealthTech · Seed</div>
+          <p class="case-desc">Digital infrastructure for blood and plasma donation, on a single platform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <div class="container">
+      <p class="quote-text">"Build It Up provided us with valuable market insights and strategic recommendations while connecting us with highly motivated, professional students who delivered meaningful contributions. It was a truly rewarding collaboration."</p>
+      <div class="quote-author">Tensive</div>
+      <div class="quote-role">MedTech · Series A portfolio</div>
+    </div>
+  </section>
+
+  <!-- PARTNER -->
+  <section class="section offwhite" id="partners">
+    <div class="container">
+      <span class="partner-eyebrow">Our network &amp; partners</span>
+      <div class="partner-grid">
+        <div class="partner-logo">Partner</div>
+        <div class="partner-logo">Partner</div>
+        <div class="partner-logo">Partner</div>
+        <div class="partner-logo">Partner</div>
+        <div class="partner-logo">Partner</div>
+        <div class="partner-logo">Partner</div>
+        <div class="partner-logo">Partner</div>
+        <div class="partner-logo">Partner</div>
+        <div class="partner-logo">Partner</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" id="newsletter">
+    <div class="container">
+      <h2>Stay in the loop</h2>
+      <p>Monthly updates on programs, events, and startup stories.</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="you@email.com" required>
+        <button type="submit" class="btn btn-red">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="#" class="logo on-dark"><span class="black">Build </span><span class="green">I</span><span class="red">t</span><span class="black"> Up</span></a>
+          <p class="footer-tagline">A network of students, founders and investors since 2012, spreading an entrepreneurial mindset among younger generations in Europe.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#offer">Program</a></li>
+            <li><a href="#case-studies">Case studies</a></li>
+            <li><a href="#">Events &amp; Ecosystem</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Network</h4>
+          <ul>
+            <li><a href="#">Team</a></li>
+            <li><a href="#partners">Partners</a></li>
+            <li><a href="#">Alumni</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get involved</h4>
+          <ul>
+            <li><a href="#">Apply</a></li>
+            <li><a href="#">Partner with us</a></li>
+            <li><a href="#newsletter">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="footer-divider">
+      <p class="footer-bottom">© 2026 Build It Up. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
