@@ -1,24 +1,29 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Build It Up — A team that builds alongside your startup</title>
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Tenor+Sans&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
+    /* Official brand palette (BIU Brand Manual) */
     --bu-black: #000000;
-    --bu-green: #1F895F;
-    --bu-red: #BC2C31;
+    --bu-green: #007D62;
+    --bu-red: #BC3E3E;
     --bu-white: #FFFFFF;
-    --bu-offwhite: #F5F5F0;
-    --bu-green-mint: #E7F3EC;
-    --bu-green-mint-dark: #DCEFE5;
-    --bu-gray: #6B6B6B;
-    --bu-gray-light: #9A9A9A;
-    --bu-border: #E7E5DF;
+    --bu-offwhite: #F4F8F3;
+    --bu-gray: #D2D2D2;
+    /* Practical additions not defined in the brand manual (readable text tones) */
+    --bu-gray-text: #58585A;
+    --bu-gray-muted: #9A9A9A;
+    --bu-gray-dark-bg: #B9B9B9;
+    --bu-green-mint: #E2F2ED;
+    --bu-green-mint-dark: #D3E9E3;
+    --bu-border: #D2D2D2;
     --radius-lg: 28px;
     --radius-md: 20px;
     --radius-pill: 999px;
@@ -35,9 +40,25 @@
   }
 
   body {
-    font-family: 'Poppins', -apple-system, 'Segoe UI', sans-serif;
+    font-family: 'Montserrat', -apple-system, 'Segoe UI', sans-serif;
     color: var(--bu-black);
     background: var(--bu-white);
+  }
+
+  h1, h2,
+  .stat-number,
+  .quote-text,
+  .newsletter h2,
+  .offer-card h3,
+  .case-name-row h3 {
+    font-family: 'Syne', sans-serif;
+  }
+
+  .eyebrow,
+  .partner-eyebrow,
+  .footer-col h4 {
+    font-family: 'Tenor Sans', sans-serif;
+    font-weight: 400;
   }
 
   a {
@@ -60,9 +81,9 @@
   .eyebrow {
     display: inline-block;
     color: var(--bu-green);
-    font-weight: 700;
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
+    font-weight: 400;
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
   }
 
@@ -92,7 +113,7 @@
   }
 
   .btn-green:hover {
-    background: #17724c;
+    background: #006650;
   }
 
   .btn-outline-green {
@@ -112,7 +133,7 @@
   }
 
   .btn-red:hover {
-    background: #9c2529;
+    background: #9A3232;
   }
 
   .btn-sm {
@@ -121,17 +142,19 @@
   }
 
   /* Logo */
-  .logo {
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    font-size: 1.5rem;
+  .logo-link {
+    display: inline-flex;
+    align-items: center;
   }
 
-  .logo .black { color: var(--bu-black); }
-  .logo .green { color: var(--bu-green); }
-  .logo .red { color: var(--bu-red); }
+  .logo-img {
+    height: 32px;
+    width: auto;
+  }
 
-  .logo.on-dark .black { color: var(--bu-white); }
+  .footer-logo-img {
+    height: 38px;
+  }
 
   /* Header */
   header {
@@ -198,17 +221,17 @@
 
   .hero h1 {
     margin-top: 22px;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.02;
-    font-size: clamp(2.6rem, 6.4vw, 5.6rem);
+    font-weight: 700;
+    letter-spacing: normal;
+    line-height: 1.08;
+    font-size: clamp(2.4rem, 5.6vw, 4.8rem);
     color: var(--bu-black);
   }
 
   .hero p.lead {
     max-width: 640px;
     margin: 28px auto 0;
-    color: var(--bu-gray);
+    color: var(--bu-gray-text);
     font-size: 1.1rem;
     line-height: 1.6;
   }
@@ -237,14 +260,14 @@
   }
 
   .stat-number {
-    font-weight: 800;
+    font-weight: 700;
     font-size: clamp(2rem, 4vw, 2.8rem);
-    letter-spacing: -0.02em;
+    letter-spacing: normal;
   }
 
   .stat-label {
     margin-top: 10px;
-    color: #B9B9B9;
+    color: var(--bu-gray-dark-bg);
     font-size: 0.88rem;
     font-weight: 500;
   }
@@ -277,15 +300,15 @@
 
   .section-head h2 {
     margin-top: 14px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    letter-spacing: normal;
     font-size: clamp(1.9rem, 3.6vw, 2.8rem);
     color: var(--bu-black);
   }
 
   .section-head p {
     margin-top: 16px;
-    color: var(--bu-gray);
+    color: var(--bu-gray-text);
     font-size: 1.05rem;
     line-height: 1.6;
   }
@@ -330,7 +353,7 @@
 
   .offer-num {
     color: var(--bu-green);
-    font-weight: 800;
+    font-weight: 700;
     font-size: 0.95rem;
     letter-spacing: 0.04em;
   }
@@ -344,7 +367,7 @@
 
   .offer-card p {
     margin-top: 12px;
-    color: var(--bu-gray);
+    color: var(--bu-gray-text);
     line-height: 1.6;
     font-size: 0.98rem;
   }
@@ -363,17 +386,12 @@
     border: 1px solid var(--bu-border);
   }
 
-  .case-badge {
-    width: 46px;
-    height: 46px;
-    border-radius: 12px;
-    background: var(--bu-green-mint);
-    color: var(--bu-green);
-    font-weight: 800;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .case-logo {
+    height: 36px;
+    width: auto;
+    max-width: 130px;
+    object-fit: contain;
+    object-position: left center;
   }
 
   .case-top {
@@ -407,14 +425,14 @@
 
   .case-sub {
     margin-top: 6px;
-    color: var(--bu-gray-light);
+    color: var(--bu-gray-muted);
     font-size: 0.85rem;
     font-weight: 500;
   }
 
   .case-desc {
     margin-top: 14px;
-    color: var(--bu-gray);
+    color: var(--bu-gray-text);
     font-size: 0.95rem;
     line-height: 1.6;
   }
@@ -435,7 +453,7 @@
     color: var(--bu-black);
     font-size: clamp(1.5rem, 3vw, 2.1rem);
     line-height: 1.45;
-    letter-spacing: -0.01em;
+    letter-spacing: normal;
   }
 
   .quote-author {
@@ -446,7 +464,7 @@
 
   .quote-role {
     margin-top: 4px;
-    color: var(--bu-gray);
+    color: var(--bu-gray-text);
     font-size: 0.9rem;
   }
 
@@ -454,33 +472,58 @@
   .partner-eyebrow {
     display: block;
     text-align: center;
-    color: var(--bu-gray-light);
-    font-weight: 700;
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
+    color: var(--bu-gray-muted);
+    font-weight: 400;
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     margin-bottom: 48px;
   }
 
-  .partner-grid {
+  .partner-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  .partner-track {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+    align-items: center;
+    width: max-content;
+    gap: 64px;
+    animation: partner-scroll 30s linear infinite;
+  }
+
+  .partner-marquee:hover .partner-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes partner-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
   .partner-logo {
-    width: 140px;
-    height: 64px;
-    border-radius: var(--radius-md);
-    background: var(--bu-white);
-    border: 1px solid var(--bu-border);
+    flex: 0 0 auto;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--bu-gray-light);
-    font-weight: 600;
-    font-size: 0.9rem;
+  }
+
+  .partner-logo img {
+    max-height: 100%;
+    max-width: 150px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.55;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+  }
+
+  .partner-logo img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
   }
 
   /* Newsletter */
@@ -492,9 +535,9 @@
 
   .newsletter h2 {
     color: var(--bu-white);
-    font-weight: 800;
+    font-weight: 700;
     font-size: clamp(1.9rem, 3.6vw, 2.6rem);
-    letter-spacing: -0.02em;
+    letter-spacing: normal;
   }
 
   .newsletter p {
@@ -525,7 +568,7 @@
   }
 
   .newsletter-form input::placeholder {
-    color: var(--bu-gray-light);
+    color: var(--bu-gray-muted);
   }
 
   /* Footer */
@@ -543,14 +586,14 @@
 
   .footer-tagline {
     margin-top: 16px;
-    color: #B9B9B9;
+    color: var(--bu-gray-dark-bg);
     font-size: 0.95rem;
     line-height: 1.6;
     max-width: 280px;
   }
 
   .footer-col h4 {
-    font-weight: 700;
+    font-weight: 400;
     font-size: 0.85rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -566,7 +609,7 @@
   }
 
   .footer-col a {
-    color: #B9B9B9;
+    color: var(--bu-gray-dark-bg);
     font-size: 0.95rem;
     transition: color 0.15s ease;
   }
@@ -630,7 +673,7 @@
   <!-- HEADER -->
   <header>
     <div class="header-inner">
-      <a href="#" class="logo"><span class="black">Build </span><span class="green">I</span><span class="red">t</span><span class="black"> Up</span></a>
+      <a href="#" class="logo-link"><img src="assets/img/logo-wordmark-colored.png" alt="Build It Up" class="logo-img"></a>
       <nav>
         <ul class="nav-links">
           <li><a href="#" class="active">Home</a></li>
@@ -730,7 +773,7 @@
       <div class="case-grid">
         <div class="case-card">
           <div class="case-top">
-            <div class="case-badge">C</div>
+            <img class="case-logo" src="assets/img/case-studies/compri.png" alt="Compri logo">
           </div>
           <div class="case-name-row">
             <h3>Compri</h3>
@@ -741,7 +784,7 @@
         </div>
         <div class="case-card">
           <div class="case-top">
-            <div class="case-badge">T</div>
+            <img class="case-logo" src="assets/img/case-studies/tensive.png" alt="Tensive logo">
           </div>
           <div class="case-name-row">
             <h3>Tensive</h3>
@@ -752,7 +795,7 @@
         </div>
         <div class="case-card">
           <div class="case-top">
-            <div class="case-badge">G</div>
+            <img class="case-logo" src="assets/img/case-studies/galeio.png" alt="Galeio logo">
           </div>
           <div class="case-name-row">
             <h3>Galeio</h3>
@@ -763,7 +806,7 @@
         </div>
         <div class="case-card">
           <div class="case-top">
-            <div class="case-badge">R</div>
+            <img class="case-logo" src="assets/img/case-studies/rosso.png" alt="Rosso logo">
           </div>
           <div class="case-name-row">
             <h3>Rosso</h3>
@@ -789,16 +832,26 @@
   <section class="section offwhite" id="partners">
     <div class="container">
       <span class="partner-eyebrow">Our network &amp; partners</span>
-      <div class="partner-grid">
-        <div class="partner-logo">Partner</div>
-        <div class="partner-logo">Partner</div>
-        <div class="partner-logo">Partner</div>
-        <div class="partner-logo">Partner</div>
-        <div class="partner-logo">Partner</div>
-        <div class="partner-logo">Partner</div>
-        <div class="partner-logo">Partner</div>
-        <div class="partner-logo">Partner</div>
-        <div class="partner-logo">Partner</div>
+      <div class="partner-marquee">
+        <div class="partner-track">
+          <div class="partner-logo"><img src="assets/img/partners/banca-generali.png" alt="Banca Generali"></div>
+          <div class="partner-logo"><img src="assets/img/partners/united-ventures.png" alt="United Ventures"></div>
+          <div class="partner-logo"><img src="assets/img/partners/bain-company.png" alt="Bain &amp; Company"></div>
+          <div class="partner-logo"><img src="assets/img/partners/360-capital.png" alt="360 Capital"></div>
+          <div class="partner-logo"><img src="assets/img/partners/ogr.png" alt="OGR"></div>
+          <div class="partner-logo"><img src="assets/img/partners/escp.png" alt="ESCP Business School"></div>
+          <div class="partner-logo"><img src="assets/img/partners/vertis-sgr.png" alt="Vertis SGR"></div>
+          <div class="partner-logo"><img src="assets/img/partners/plug-and-play.png" alt="Plug and Play"></div>
+          <!-- duplicated set so the track loops seamlessly -->
+          <div class="partner-logo" aria-hidden="true"><img src="assets/img/partners/banca-generali.png" alt=""></div>
+          <div class="partner-logo" aria-hidden="true"><img src="assets/img/partners/united-ventures.png" alt=""></div>
+          <div class="partner-logo" aria-hidden="true"><img src="assets/img/partners/bain-company.png" alt=""></div>
+          <div class="partner-logo" aria-hidden="true"><img src="assets/img/partners/360-capital.png" alt=""></div>
+          <div class="partner-logo" aria-hidden="true"><img src="assets/img/partners/ogr.png" alt=""></div>
+          <div class="partner-logo" aria-hidden="true"><img src="assets/img/partners/escp.png" alt=""></div>
+          <div class="partner-logo" aria-hidden="true"><img src="assets/img/partners/vertis-sgr.png" alt=""></div>
+          <div class="partner-logo" aria-hidden="true"><img src="assets/img/partners/plug-and-play.png" alt=""></div>
+        </div>
       </div>
     </div>
   </section>
@@ -820,7 +873,7 @@
     <div class="container">
       <div class="footer-top">
         <div>
-          <a href="#" class="logo on-dark"><span class="black">Build </span><span class="green">I</span><span class="red">t</span><span class="black"> Up</span></a>
+          <a href="#" class="logo-link"><img src="assets/img/logo-wordmark-white-green-red.png" alt="Build It Up" class="logo-img footer-logo-img"></a>
           <p class="footer-tagline">A network of students, founders and investors since 2012, spreading an entrepreneurial mindset among younger generations in Europe.</p>
         </div>
         <div class="footer-col">
