@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Tenor+Sans&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     /* Official brand palette (BIU Brand Manual) */
@@ -48,17 +48,17 @@
   h1, h2,
   .stat-number,
   .quote-text,
-  .newsletter h2,
-  .offer-card h3,
-  .case-name-row h3 {
-    font-family: 'Syne', sans-serif;
+  .newsletter h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    line-height: 1.25;
   }
 
   .eyebrow,
   .partner-eyebrow,
   .footer-col h4 {
-    font-family: 'Tenor Sans', sans-serif;
-    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
   }
 
   a {
@@ -81,9 +81,9 @@
   .eyebrow {
     display: inline-block;
     color: var(--bu-green);
-    font-weight: 400;
+    font-weight: 700;
     font-size: 0.85rem;
-    letter-spacing: 0.16em;
+    letter-spacing: normal;
     text-transform: uppercase;
   }
 
@@ -223,7 +223,7 @@
     margin-top: 22px;
     font-weight: 700;
     letter-spacing: normal;
-    line-height: 1.08;
+    line-height: 1.22;
     font-size: clamp(2.4rem, 5.6vw, 4.8rem);
     color: var(--bu-black);
   }
@@ -473,9 +473,9 @@
     display: block;
     text-align: center;
     color: var(--bu-gray-muted);
-    font-weight: 400;
+    font-weight: 700;
     font-size: 0.85rem;
-    letter-spacing: 0.16em;
+    letter-spacing: normal;
     text-transform: uppercase;
     margin-bottom: 48px;
   }
@@ -594,7 +594,7 @@
   }
 
   .footer-col h4 {
-    font-weight: 400;
+    font-weight: 700;
     font-size: 0.85rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -677,8 +677,8 @@
       <a href="#" class="logo-link"><img src="assets/img/logo-wordmark-colored.png" alt="Build It Up" class="logo-img"></a>
       <nav>
         <ul class="nav-links">
-          <li><a href="#" class="active">Home</a></li>
-          <li><a href="#offer">Program</a></li>
+          <li><a href="home.html" class="active">Home</a></li>
+          <li><a href="program.html">Program</a></li>
           <li><a href="#case-studies">Events &amp; Ecosystem</a></li>
           <li><a href="#partners">Team</a></li>
           <li><a href="#newsletter">Contact</a></li>
@@ -880,7 +880,7 @@
         <div class="footer-col">
           <h4>Explore</h4>
           <ul>
-            <li><a href="#offer">Program</a></li>
+            <li><a href="program.html">Program</a></li>
             <li><a href="#case-studies">Case studies</a></li>
             <li><a href="#">Events &amp; Ecosystem</a></li>
           </ul>
