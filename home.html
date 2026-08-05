@@ -206,6 +206,38 @@
 
   .nav-toggle {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 200;
+  }
+
+  .nav-toggle-bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--bu-black);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   /* Hero */
@@ -634,12 +666,54 @@
 
   /* Responsive */
   @media (max-width: 900px) {
-    .nav-links {
-      display: none;
-    }
-
     .footer-top {
       grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      background: var(--bu-white);
+      border-bottom: 1px solid var(--bu-border);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .nav-links.nav-open {
+      max-height: 600px;
+    }
+
+    .nav-links li {
+      width: 100%;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--bu-border);
+    }
+
+    .nav-links li:last-child a {
+      border-bottom: none;
+    }
+
+    .nav-links a.btn {
+      margin: 16px 24px;
+      display: inline-flex;
+      border-bottom: none;
     }
   }
 
@@ -674,16 +748,26 @@
   <!-- HEADER -->
   <header>
     <div class="header-inner">
-      <a href="#" class="logo-link"><img src="assets/img/logo-wordmark-colored.png" alt="Build It Up" class="logo-img"></a>
+      <a href="home.html" class="logo-link"><img src="assets/img/logo-wordmark-colored.png" alt="Build It Up" class="logo-img"></a>
       <nav>
         <ul class="nav-links">
-          <li><a href="home.html" class="active">Home</a></li>
-          <li><a href="program.html">Program</a></li>
-          <li><a href="#case-studies">Events &amp; Ecosystem</a></li>
-          <li><a href="#partners">Team</a></li>
+          <li><a href="program.html">The Program</a></li>
+          <li><a href="#case-studies">Case Studies</a></li>
+          <!-- TODO: collegare a pagina Events quando pronta -->
+          <li><a href="#">Events &amp; Ecosystem</a></li>
+          <!-- TODO: collegare a pagina Team quando pronta -->
+          <li><a href="#">Team</a></li>
+          <li><a href="#partners">Partners</a></li>
+          <!-- TODO: collegare a pagina Alumni quando pronta -->
+          <li><a href="#">Alumni</a></li>
+          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform?usp=header" target="_blank" rel="noopener" class="btn btn-green btn-sm">Apply</a></li>
           <li><a href="#newsletter">Contact</a></li>
         </ul>
-        <a href="#" class="btn btn-green btn-sm">Apply now</a>
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
       </nav>
     </div>
   </header>
@@ -906,6 +990,34 @@
       <p class="footer-bottom">© 2026 Build It Up. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var navLinks = document.querySelector('.nav-links');
+      if (!toggle || !navLinks) return;
+
+      function closeMenu() {
+        navLinks.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+
+      toggle.addEventListener('click', function () {
+        var isOpen = navLinks.classList.toggle('nav-open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMenu);
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth >= 768) {
+          closeMenu();
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
