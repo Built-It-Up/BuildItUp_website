@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build It Up — Program</title>
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Official brand palette (BIU Brand Manual) */
+    --bu-black: #000000;
+    --bu-green: #007D62;
+    --bu-red: #BC3E3E;
+    --bu-white: #FFFFFF;
+    --bu-offwhite: #F4F8F3;
+    --bu-gray: #D2D2D2;
+    /* Practical additions not defined in the brand manual (readable text tones) */
+    --bu-gray-text: #58585A;
+    --bu-gray-muted: #9A9A9A;
+    --bu-gray-dark-bg: #B9B9B9;
+    --bu-green-mint: #E2F2ED;
+    --bu-green-mint-dark: #D3E9E3;
+    --bu-border: #D2D2D2;
+    --radius-lg: 28px;
+    --radius-md: 20px;
+    --radius-pill: 999px;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Montserrat', -apple-system, 'Segoe UI', sans-serif;
+    color: var(--bu-black);
+    background: var(--bu-white);
+  }
+
+  h1, h2,
+  .big-num,
+  .timeline-month,
+  .case-full-top h3,
+  .faq-question {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--bu-green);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: normal;
+    text-transform: uppercase;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-green {
+    background: var(--bu-green);
+    color: var(--bu-white);
+  }
+
+  .btn-green:hover {
+    background: #006650;
+  }
+
+  .btn-white {
+    background: var(--bu-white);
+    color: var(--bu-green);
+  }
+
+  .btn-white:hover {
+    background: var(--bu-offwhite);
+  }
+
+  .btn-sm {
+    padding: 10px 22px;
+    font-size: 0.85rem;
+  }
+
+  /* Logo */
+  .logo-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    height: 32px;
+    width: auto;
+  }
+
+  .footer-logo-img {
+    height: 38px;
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bu-white);
+    border-bottom: 1px solid var(--bu-border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--bu-black);
+    padding-bottom: 6px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--bu-green);
+  }
+
+  .nav-links a.active {
+    color: var(--bu-green);
+    border-bottom-color: var(--bu-green);
+    font-weight: 600;
+  }
+
+  /* Section headers */
+  .section {
+    padding: 100px 24px;
+  }
+
+  .section.offwhite {
+    background: var(--bu-offwhite);
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 56px;
+  }
+
+  .section-head h2 {
+    margin-top: 14px;
+    font-weight: 700;
+    font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+    color: var(--bu-black);
+  }
+
+  .section-head p {
+    margin-top: 16px;
+    color: var(--bu-gray-text);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  /* Section 1 — The Program (intro on black) */
+  .program-intro {
+    background: var(--bu-black);
+    padding: 100px 24px 120px;
+    text-align: center;
+  }
+
+  .program-intro .container {
+    max-width: 780px;
+  }
+
+  .program-intro h2 {
+    color: var(--bu-white);
+    font-weight: 700;
+    font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  }
+
+  .program-intro p {
+    margin-top: 24px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    line-height: 1.6;
+  }
+
+  .program-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .stat-card {
+    background: var(--bu-white);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .stat-card .big-num {
+    color: var(--bu-green);
+    font-weight: 800;
+    font-size: 2.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  .stat-card h3 {
+    margin-top: 14px;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--bu-black);
+  }
+
+  .stat-card p {
+    margin-top: 10px;
+    color: var(--bu-gray-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Section 2 — Timeline */
+  .timeline-wrap {
+    position: relative;
+    margin-top: 24px;
+  }
+
+  .timeline-line {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--bu-border);
+  }
+
+  .timeline-items {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .timeline-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .timeline-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--bu-green);
+    border: 4px solid var(--bu-white);
+    margin-bottom: 22px;
+  }
+
+  .timeline-month {
+    color: var(--bu-green);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .timeline-desc {
+    margin-top: 8px;
+    color: var(--bu-gray-text);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    max-width: 170px;
+  }
+
+  /* Section 3 — Services */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    background: var(--bu-white);
+    border-radius: var(--radius-lg);
+    border-top: 3px solid var(--bu-green);
+    padding: 32px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  }
+
+  .service-num {
+    color: var(--bu-green);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+  }
+
+  .service-card h3 {
+    margin-top: 14px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--bu-black);
+  }
+
+  .service-note {
+    background: var(--bu-green);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: flex;
+    align-items: center;
+  }
+
+  .service-note p {
+    color: var(--bu-white);
+    font-weight: 600;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .service-card p {
+    margin-top: 12px;
+    color: var(--bu-gray-text);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  /* Section 4 — Case studies (full width stacked) */
+  .case-full-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .case-full-card {
+    background: var(--bu-white);
+    border: 1px solid var(--bu-border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+  }
+
+  .case-full-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .case-full-logo {
+    height: 32px;
+    width: auto;
+    max-width: 130px;
+    object-fit: contain;
+    object-position: left center;
+    margin-bottom: 14px;
+  }
+
+  .case-full-label {
+    color: var(--bu-gray-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .case-full-top h3 {
+    margin-top: 8px;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--bu-black);
+  }
+
+  .pill-amount {
+    flex: 0 0 auto;
+    background: var(--bu-green-mint);
+    color: var(--bu-green);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+  }
+
+  .case-full-desc {
+    margin-top: 20px;
+    color: var(--bu-gray-text);
+    font-size: 1rem;
+    line-height: 1.65;
+    max-width: 760px;
+  }
+
+  .case-full-support {
+    margin-top: 16px;
+    color: var(--bu-gray-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .case-full-support strong {
+    color: var(--bu-black);
+    font-weight: 700;
+  }
+
+  .thin-divider {
+    margin: 28px 0 24px;
+    height: 1px;
+    background: var(--bu-border);
+    border: none;
+  }
+
+  .results-label {
+    display: block;
+    color: var(--bu-red);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .results-grid.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .result-item h4 {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--bu-black);
+  }
+
+  .result-item p {
+    margin-top: 8px;
+    color: var(--bu-gray-text);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  /* Section 5 — FAQ */
+  .faq-list {
+    max-width: 820px;
+    margin: 0 auto;
+    border-top: 1px solid var(--bu-border);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--bu-border);
+  }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: none;
+    border: none;
+    padding: 26px 4px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--bu-black);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .faq-icon {
+    position: relative;
+    flex: 0 0 auto;
+    width: 16px;
+    height: 16px;
+  }
+
+  .faq-icon::before,
+  .faq-icon::after {
+    content: '';
+    position: absolute;
+    background: var(--bu-green);
+    border-radius: 2px;
+  }
+
+  .faq-icon::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+
+  .faq-icon::after {
+    left: 50%;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    transform: translateX(-50%);
+    transition: transform 0.25s ease;
+  }
+
+  .faq-item.open .faq-icon::after {
+    transform: translateX(-50%) scaleY(0);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 4px;
+  }
+
+  .faq-answer p {
+    color: var(--bu-gray-text);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 240px;
+    padding-bottom: 26px;
+  }
+
+  /* Section 6 — CTA */
+  .cta-section {
+    background: var(--bu-green);
+    padding: 100px 24px;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    color: var(--bu-white);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+  }
+
+  .cta-section p {
+    margin-top: 16px;
+    color: var(--bu-green-mint);
+    font-size: 1.05rem;
+  }
+
+  .cta-section .btn {
+    margin-top: 36px;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--bu-black);
+    color: var(--bu-white);
+    padding: 80px 24px 32px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+
+  .footer-tagline {
+    margin-top: 16px;
+    color: var(--bu-gray-dark-bg);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--bu-white);
+    margin-bottom: 18px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-col a {
+    color: var(--bu-gray-dark-bg);
+    font-size: 0.95rem;
+    transition: color 0.15s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--bu-white);
+  }
+
+  .footer-divider {
+    margin: 56px 0 24px;
+    height: 1px;
+    background: #262626;
+    border: none;
+  }
+
+  .footer-bottom {
+    color: #8A8A8A;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .nav-links {
+      display: none;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .program-stats-grid,
+    .services-grid,
+    .results-grid,
+    .results-grid.cols-2 {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline-items {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+
+    .timeline-line {
+      display: none;
+    }
+
+    .timeline-item {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .timeline-desc {
+      max-width: none;
+    }
+
+    .case-full-card {
+      padding: 28px;
+    }
+
+    .footer-top {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="home.html" class="logo-link"><img src="assets/img/logo-wordmark-colored.png" alt="Build It Up" class="logo-img"></a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="program.html" class="active">Program</a></li>
+          <li><a href="#">Events &amp; Ecosystem</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="home.html#newsletter">Contact</a></li>
+        </ul>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform?usp=header" target="_blank" rel="noopener" class="btn btn-green btn-sm">Apply now</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- SECTION 1 — THE PROGRAM -->
+  <section class="program-intro">
+    <div class="container">
+      <h2>The Program</h2>
+      <p>A dedicated team of students works hands-on on the projects that move the needle, with an integrated, flexible approach built around each startup's specific needs.</p>
+    </div>
+  </section>
+
+  <section class="section offwhite">
+    <div class="container">
+      <div class="program-stats-grid">
+        <div class="stat-card">
+          <div class="big-num">6m</div>
+          <h3>Total duration</h3>
+          <p>October to the end of March, structured around your milestones.</p>
+        </div>
+        <div class="stat-card">
+          <div class="big-num">1 + 5</div>
+          <h3>Dedicated team</h3>
+          <p>One project manager plus four to five associates for each startup.</p>
+        </div>
+        <div class="stat-card">
+          <div class="big-num">€0</div>
+          <h3>Free of charge</h3>
+          <p>The program is offered to startups at no cost.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 — TIMELINE -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>How the six months unfold</h2>
+        <p>October to the end of March, with regular check-ins to set concrete goals and track progress.</p>
+      </div>
+      <div class="timeline-wrap">
+        <div class="timeline-line"></div>
+        <div class="timeline-items">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-month">Oct</div>
+            <div class="timeline-desc">Kickoff, scoping &amp; team matching</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-month">Nov–Dec</div>
+            <div class="timeline-desc">Deep-dive strategic workstreams</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-month">Jan–Feb</div>
+            <div class="timeline-desc">Build, validate &amp; iterate</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-month">Mar</div>
+            <div class="timeline-desc">Delivery, handoff &amp; next steps</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — SERVICES -->
+  <section class="section offwhite">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Services</span>
+        <h2>Five levers we work across</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <h3>Process Automation</h3>
+          <p>Support on automating operational and commercial processes to boost efficiency and cut manual work.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <h3>Go-To-Market</h3>
+          <p>Identifying target segments, validating through commercial proof-of-concepts and designing launch channels.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <h3>Fundraising Services</h3>
+          <p>Investor mapping, support through deals and connections to our network of angels and VCs.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <h3>Strategic Materials &amp; Pitch Decks</h3>
+          <p>Creating and reviewing presentations and tools for communicating with partners and investors.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-num">05</div>
+          <h3>Outreach</h3>
+          <p>Lead generation and outreach to identify new opportunities for the sales process.</p>
+        </div>
+        <div class="service-note">
+          <p>Every service above is tailor-made, shaped around your startup's stage, sector and specific needs, not delivered off-the-shelf.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — CASE STUDIES -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Case Studies</span>
+        <h2>Four real journeys</h2>
+        <p>From deep-tech to healthtech, where our teams worked side by side with the founders.</p>
+      </div>
+
+      <div class="case-full-list">
+        <!-- Compri -->
+        <div class="case-full-card">
+          <div class="case-full-top">
+            <div>
+              <img class="case-full-logo" src="assets/img/case-studies/compri.png" alt="Compri logo">
+              <div class="case-full-label">Case Study · 01 — AI &amp; SaaS</div>
+              <h3>Compri × BIU</h3>
+            </div>
+            <span class="pill-amount">€5M · Seed</span>
+          </div>
+          <p class="case-full-desc">An AI-native procurement platform that simplifies purchasing processes through intelligent automation, now scaling its commercial operations.</p>
+          <p class="case-full-support"><strong>Backed by:</strong> Picus Capital, Shapers, Italian Founders Fund, Dutch Founders Fund</p>
+          <hr class="thin-divider">
+          <span class="results-label">Project Results</span>
+          <div class="results-grid">
+            <div class="result-item">
+              <h4>AI-driven sales automation</h4>
+              <p>Lead qualification workflows with HubSpot and Clay.</p>
+            </div>
+            <div class="result-item">
+              <h4>Build vs. buy analysis</h4>
+              <p>Mapping of AI SDR platforms and their trade-offs.</p>
+            </div>
+            <div class="result-item">
+              <h4>CRM &amp; database audit</h4>
+              <p>Data quality and requirements to scale.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tensive -->
+        <div class="case-full-card">
+          <div class="case-full-top">
+            <div>
+              <img class="case-full-logo" src="assets/img/case-studies/tensive.png" alt="Tensive logo">
+              <div class="case-full-label">Case Study · 02 — MedTech</div>
+              <h3>Tensive × BIU</h3>
+            </div>
+            <span class="pill-amount">€22.7M · Series A</span>
+          </div>
+          <p class="case-full-desc">A startup developing biodegradable implants for post-mastectomy breast reconstruction, regenerating tissue naturally.</p>
+          <p class="case-full-support"><strong>Backed by:</strong> Panakès Partners, EIC Fund, CDP, Recomec</p>
+          <hr class="thin-divider">
+          <span class="results-label">Project Results</span>
+          <div class="results-grid">
+            <div class="result-item">
+              <h4>Competitive intelligence</h4>
+              <p>Over 20 competitors analysed and mapped.</p>
+            </div>
+            <div class="result-item">
+              <h4>Market analysis</h4>
+              <p>Independent assessment and alternative scenarios.</p>
+            </div>
+            <div class="result-item">
+              <h4>Go-to-market strategy</h4>
+              <p>Commercialisation framework and expert interviews.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Galeio -->
+        <div class="case-full-card">
+          <div class="case-full-top">
+            <div>
+              <img class="case-full-logo" src="assets/img/case-studies/galeio.png" alt="Galeio logo">
+              <div class="case-full-label">Case Study · 03 — Deep-Tech</div>
+              <h3>Galeio × BIU</h3>
+            </div>
+            <span class="pill-amount">Station F · Paris</span>
+          </div>
+          <p class="case-full-desc">A deep-tech startup turning satellite imagery into intelligence: insights from geospatial data for insurance, energy, infrastructure and the environment.</p>
+          <p class="case-full-support"><strong>Supported by:</strong> SpaceFounders, ESA BIC Nord France, Incubateur Télécom Paris</p>
+          <hr class="thin-divider">
+          <span class="results-label">Project Results</span>
+          <div class="results-grid">
+            <div class="result-item">
+              <h4>Market expansion</h4>
+              <p>New industrial applications and adjacent markets.</p>
+            </div>
+            <div class="result-item">
+              <h4>Commercial strategy</h4>
+              <p>High-potential customer segments and use cases.</p>
+            </div>
+            <div class="result-item">
+              <h4>Business development</h4>
+              <p>Outreach and customer discovery in the insurance sector.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rosso -->
+        <div class="case-full-card">
+          <div class="case-full-top">
+            <div>
+              <img class="case-full-logo" src="assets/img/case-studies/rosso.png" alt="Rosso logo">
+              <div class="case-full-label">Case Study · 04 — HealthTech</div>
+              <h3>Rosso × BIU</h3>
+            </div>
+            <span class="pill-amount">€3M · Seed</span>
+          </div>
+          <p class="case-full-desc">A HealthTech startup building digital infrastructure for blood and plasma donation, founded by Chiara Schettino (2001) &amp; Filippo Toni (2006), among the youngest entrepreneurs in Italy.</p>
+          <p class="case-full-support"><strong>Result:</strong> Closed a €3M Seed round led by 360 Capital, with CDP Venture Capital and Angelini Investments</p>
+          <hr class="thin-divider">
+          <span class="results-label">Project Results</span>
+          <div class="results-grid cols-2">
+            <div class="result-item">
+              <h4>Investor mapping</h4>
+              <p>Italian and international VCs, prioritised targets.</p>
+            </div>
+            <div class="result-item">
+              <h4>Valuation analysis</h4>
+              <p>Comparable transactions and market multiples.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 — FAQ -->
+  <section class="section offwhite">
+    <div class="container">
+      <div class="section-head">
+        <h2>Frequently asked</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Who can apply to the program?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-answer">
+            <p>Early-stage startups and founders looking for hands-on strategic and operational support from an embedded team.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How long is the program?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-answer">
+            <p>Six months, from October to the end of March, with regular check-ins to set concrete goals and track progress.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What does it cost?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-answer">
+            <p>The program is offered to startups free of charge.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Who works on my project?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-answer">
+            <p>A dedicated team of one project manager plus four to five associates, built around your startup's specific needs.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How do companies and investors get involved?
+            <span class="faq-icon"></span>
+          </button>
+          <div class="faq-answer">
+            <p>As partners, mentors and judges, or by supporting and joining our events and network across the ecosystem.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 — CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to build alongside a team?</h2>
+      <p>Applications for the October cohort are reviewed on a rolling basis.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform?usp=header" target="_blank" rel="noopener" class="btn btn-white">Apply to the program</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="home.html" class="logo-link"><img src="assets/img/logo-wordmark-white-green-red.png" alt="Build It Up" class="logo-img footer-logo-img"></a>
+          <p class="footer-tagline">A network of students, founders and investors since 2012, spreading an entrepreneurial mindset among younger generations in Europe.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="program.html">Program</a></li>
+            <li><a href="home.html#case-studies">Case studies</a></li>
+            <li><a href="#">Events &amp; Ecosystem</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Network</h4>
+          <ul>
+            <li><a href="#">Team</a></li>
+            <li><a href="home.html#partners">Partners</a></li>
+            <li><a href="#">Alumni</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get involved</h4>
+          <ul>
+            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform?usp=header" target="_blank" rel="noopener">Apply</a></li>
+            <li><a href="#">Partner with us</a></li>
+            <li><a href="home.html#newsletter">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="footer-divider">
+      <p class="footer-bottom">© 2026 Build It Up. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-item').forEach(function (item) {
+      var question = item.querySelector('.faq-question');
+      question.addEventListener('click', function () {
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(function (openItem) {
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          question.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
