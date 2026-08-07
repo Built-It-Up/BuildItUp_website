@@ -324,6 +324,48 @@
     font-weight: 600;
   }
 
+  /* Gallery / Highlights */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .gallery-item {
+    display: flex;
+    flex-direction: column;
+    background: var(--bu-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .gallery-img-wrap {
+    flex: 1;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+
+  .gallery-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .gallery-item:hover .gallery-img-wrap img {
+    transform: scale(1.06);
+  }
+
+  .gallery-caption {
+    padding: 14px 18px;
+    color: var(--bu-gray-text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
   /* Ecosystem logos */
   .ecosystem-grid {
     display: grid;
@@ -500,6 +542,31 @@
       grid-template-columns: 1fr;
     }
   }
+
+  @media (min-width: 641px) and (max-width: 900px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 901px) {
+    .gallery-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+    }
+
+    .gallery-img-wrap {
+      aspect-ratio: auto;
+    }
+
+    .gallery-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 3; }
+    .gallery-item:nth-child(2) { grid-column: 3 / 4; grid-row: 1 / 2; }
+    .gallery-item:nth-child(3) { grid-column: 4 / 5; grid-row: 1 / 2; }
+    .gallery-item:nth-child(4) { grid-column: 3 / 4; grid-row: 2 / 3; }
+    .gallery-item:nth-child(5) { grid-column: 1 / 3; grid-row: 3 / 4; }
+    .gallery-item:nth-child(6) { grid-column: 4 / 5; grid-row: 2 / 3; }
+    .gallery-item:nth-child(7) { grid-column: 3 / 5; grid-row: 3 / 4; }
+  }
 </style>
 </head>
 <body>
@@ -566,6 +633,61 @@
           <p>Short description of the event goes here, with more details coming soon.</p>
           <div class="event-location">Location TBA</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY / HIGHLIGHTS -->
+  <section class="section" id="gallery">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Highlights</span>
+        <h2>Moments from our community</h2>
+        <p>A look back at hackathons, talks, and time spent with founders and partners.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="assets/img/events/01-banca-generali-panel.png" alt="Investor Day hosted at Banca Generali's offices, one of our partners" loading="lazy">
+          </div>
+          <figcaption class="gallery-caption">Investor Day hosted at Banca Generali's offices, one of our partners</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="assets/img/events/03-automation-hackathon-flyer.png" alt="Automation Hackathon at Feat. House, Turin" loading="lazy">
+          </div>
+          <figcaption class="gallery-caption">Automation Hackathon at Feat. House, Turin</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="assets/img/events/04-bending-spoons-office.png" alt="Visiting Bending Spoons' office" loading="lazy">
+          </div>
+          <figcaption class="gallery-caption">Visiting Bending Spoons' office</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="assets/img/events/05-bain-company-office.png" alt="At Bain &amp; Company's offices" loading="lazy">
+          </div>
+          <figcaption class="gallery-caption">At Bain &amp; Company's offices</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="assets/img/events/06-hackathon-team-working.png" alt="Teams building during the hackathon" loading="lazy">
+          </div>
+          <figcaption class="gallery-caption">Teams building during the hackathon</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="assets/img/events/07-hackathon-team-discussion.png" alt="Mentoring session during the hackathon" loading="lazy">
+          </div>
+          <figcaption class="gallery-caption">Mentoring session during the hackathon</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-img-wrap">
+            <img src="assets/img/events/08-buildup-keynote-stage.png" alt="Keynote on the big stage" loading="lazy">
+          </div>
+          <figcaption class="gallery-caption">Keynote on the big stage</figcaption>
+        </figure>
       </div>
     </div>
   </section>
