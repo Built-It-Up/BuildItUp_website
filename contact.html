@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Build It Up — Team</title>
+<title>Build It Up — Contact</title>
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,15 +105,6 @@
 
   .btn-green:hover {
     background: #006650;
-  }
-
-  .btn-white {
-    background: var(--bu-white);
-    color: var(--bu-green);
-  }
-
-  .btn-white:hover {
-    background: var(--bu-offwhite);
   }
 
   .btn-sm {
@@ -221,18 +212,18 @@
   }
 
   /* Hero */
-  .team-hero {
+  .contact-hero {
     background: var(--bu-offwhite);
-    padding: 100px 24px 110px;
+    padding: 100px 24px 80px;
     text-align: center;
     scroll-margin-top: 90px;
   }
 
-  .team-hero .container {
+  .contact-hero .container {
     max-width: 780px;
   }
 
-  .team-hero h1 {
+  .contact-hero h1 {
     margin-top: 22px;
     font-weight: 700;
     line-height: 1.22;
@@ -240,7 +231,7 @@
     color: var(--bu-black);
   }
 
-  .team-hero p.lead {
+  .contact-hero p.lead {
     max-width: 620px;
     margin: 28px auto 0;
     color: var(--bu-gray-text);
@@ -248,7 +239,7 @@
     line-height: 1.6;
   }
 
-  /* Team grid */
+  /* Section */
   .section {
     padding: 100px 24px;
     scroll-margin-top: 90px;
@@ -258,120 +249,96 @@
     background: var(--bu-offwhite);
   }
 
-  .team-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
-  }
-
-  .team-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    flex: 0 0 calc(33.333% - 16px);
-    background: var(--bu-white);
-    border-radius: var(--radius-lg);
-    padding: 32px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
-  }
-
-  .team-photo {
-    flex: 0 0 auto;
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-
-  .team-info h3 {
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: var(--bu-black);
-    line-height: 1.3;
-  }
-
-  .team-role {
-    display: block;
-    margin-top: 4px;
-    color: var(--bu-green);
-    font-weight: 700;
-    font-size: 0.9rem;
-  }
-
-  .team-contact {
-    margin-top: 12px;
-  }
-
-  .team-contact p {
-    color: var(--bu-gray-text);
-    font-size: 0.88rem;
-    line-height: 1.5;
-    word-break: break-word;
-  }
-
-  /* Purpose / Vision / Mission */
-  .pvm-grid {
+  /* Contact cards */
+  .contact-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
 
-  .pvm-card {
+  .contact-card {
     background: var(--bu-white);
     border-radius: var(--radius-lg);
-    padding: 36px;
+    border-left: 3px solid var(--bu-green);
+    padding: 32px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.05);
   }
 
-  .pvm-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    background: var(--bu-green);
-    color: var(--bu-white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1.3rem;
-    margin-bottom: 24px;
-  }
-
-  .pvm-card h3 {
+  .contact-card h3 {
     font-weight: 700;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--bu-black);
   }
 
-  .pvm-card p {
-    margin-top: 12px;
+  .contact-card p {
+    margin-top: 10px;
     color: var(--bu-gray-text);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.92rem;
+    line-height: 1.55;
   }
 
-  /* CTA */
-  .cta-section {
-    background: var(--bu-green);
-    padding: 100px 24px;
-    text-align: center;
-  }
-
-  .cta-section h2 {
-    color: var(--bu-white);
-    font-weight: 700;
-    font-size: clamp(1.9rem, 3.6vw, 2.6rem);
-  }
-
-  .cta-section p {
+  .contact-email {
+    display: inline-block;
     margin-top: 16px;
-    color: var(--bu-green-mint);
-    font-size: 1.05rem;
+    color: var(--bu-green);
+    font-weight: 700;
+    font-size: 0.92rem;
   }
 
-  .cta-section .btn {
-    margin-top: 36px;
+  .contact-email:hover {
+    text-decoration: underline;
+  }
+
+  /* Message form */
+  .contact-form-wrap {
+    max-width: 640px;
+    margin: 56px auto 0;
+  }
+
+  .contact-form-card {
+    background: var(--bu-white);
+    border-radius: var(--radius-lg);
+    padding: 44px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .contact-form-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 28px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--bu-black);
+    background: var(--bu-white);
+    border: 1px solid var(--bu-border);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    margin-bottom: 18px;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--bu-green);
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: var(--bu-gray-muted);
+  }
+
+  .contact-form textarea {
+    min-height: 130px;
+    resize: vertical;
+  }
+
+  .contact-form .btn {
+    margin-top: 4px;
   }
 
   /* Footer */
@@ -489,22 +456,16 @@
   }
 
   @media (max-width: 720px) {
-    .team-card {
-      flex-basis: 100%;
+    .contact-grid {
+      grid-template-columns: 1fr;
     }
 
-    .pvm-grid {
-      grid-template-columns: 1fr;
+    .contact-form-card {
+      padding: 28px;
     }
 
     .footer-top {
       grid-template-columns: 1fr;
-    }
-  }
-
-  @media (min-width: 721px) and (max-width: 900px) {
-    .team-card {
-      flex-basis: calc(50% - 12px);
     }
   }
 </style>
@@ -520,12 +481,12 @@
           <li><a href="program.html">The Program</a></li>
           <li><a href="home.html#case-studies">Case Studies</a></li>
           <li><a href="events.html">Events &amp; Ecosystem</a></li>
-          <li><a href="#team-hero" class="active">Team</a></li>
+          <li><a href="team.html">Team</a></li>
           <li><a href="home.html#partners">Partners</a></li>
           <!-- TODO: collegare a pagina Alumni quando pronta -->
           <li><a href="#">Alumni</a></li>
           <li><a href="https://forms.gle/hB77mHaVYogRDEQK8" target="_blank" rel="noopener noreferrer" class="btn btn-green btn-sm">Apply</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#contact-hero" class="active">Contact</a></li>
         </ul>
         <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
           <span class="nav-toggle-bar"></span>
@@ -537,106 +498,47 @@
   </header>
 
   <!-- HERO -->
-  <section class="team-hero" id="team-hero">
+  <section class="contact-hero" id="contact-hero">
     <div class="container">
-      <span class="eyebrow">The people behind BIU</span>
-      <h1>Leadership Team 2026/2027</h1>
-      <p class="lead">A network of students, founders and investors: the team coordinating BIU's programs, events and partnerships.</p>
+      <span class="eyebrow">Get in touch</span>
+      <h1>Let's write the next chapter of your startup together</h1>
+      <p class="lead">Applying to the program, partnering with BIU, or joining as a student: tell us which and we'll take it from there.</p>
     </div>
   </section>
 
-  <!-- TEAM GRID -->
+  <!-- CONTACT CARDS + FORM -->
   <section class="section offwhite">
     <div class="container">
-      <div class="team-grid">
-        <div class="team-card">
-          <img class="team-photo" src="assets/img/team/andrea-rosa.jpg" alt="Andrea Rosa Bernardins">
-          <div class="team-info">
-            <h3>Andrea Rosa Bernardins</h3>
-            <span class="team-role">President</span>
-            <div class="team-contact">
-              <p>andrea.rosa_bernardins@builditup.it</p>
-              <p>+39 391 485 5761</p>
-            </div>
-          </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Apply to the program</h3>
+          <p>Early-stage startups looking for an embedded team.</p>
+          <a class="contact-email" href="mailto:emma.zovi@builditup.it">emma.zovi@builditup.it</a>
         </div>
-        <div class="team-card">
-          <img class="team-photo" src="assets/img/team/giorgio-farina.png" alt="Giorgio Farina">
-          <div class="team-info">
-            <h3>Giorgio Farina</h3>
-            <span class="team-role">Vice President</span>
-            <div class="team-contact">
-              <p>giorgio.farina@builditup.it</p>
-              <p>+39 339 615 0446</p>
-            </div>
-          </div>
+        <div class="contact-card">
+          <h3>Become a partner</h3>
+          <p>Companies, investors and innovation partners.</p>
+          <a class="contact-email" href="mailto:eric.rossi_patriarca@builditup.it">eric.rossi_patriarca@builditup.it</a>
         </div>
-        <div class="team-card">
-          <img class="team-photo" src="assets/img/team/vincenzo-sebastiano.png" alt="Vincenzo Sebastiano">
-          <div class="team-info">
-            <h3>Vincenzo Sebastiano</h3>
-            <span class="team-role">Vice President</span>
-            <div class="team-contact">
-              <p>vincenzo.sebastiano@builditup.it</p>
-              <p>+39 324 887 1268</p>
-            </div>
-          </div>
-        </div>
-        <div class="team-card">
-          <img class="team-photo" src="assets/img/team/emma-zovi.png" alt="Emma Zovi">
-          <div class="team-info">
-            <h3>Emma Zovi</h3>
-            <span class="team-role">Head of Acceleration</span>
-            <div class="team-contact">
-              <p>emma.zovi@builditup.it</p>
-              <p>+39 391 342 8851</p>
-            </div>
-          </div>
-        </div>
-        <div class="team-card">
-          <img class="team-photo" src="assets/img/team/eric-rossi.png" alt="Eric Rossi Patriarca">
-          <div class="team-info">
-            <h3>Eric Rossi Patriarca</h3>
-            <span class="team-role">Head of BD</span>
-            <div class="team-contact">
-              <p>eric.rossi_patriarca@builditup.it</p>
-              <p>+39 331 353 9035</p>
-            </div>
-          </div>
+        <div class="contact-card">
+          <h3>Join as a student</h3>
+          <p>Students who want to build alongside founders.</p>
+          <a class="contact-email" href="mailto:andrea.rosa_bernardins@builditup.it">andrea.rosa_bernardins@builditup.it</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- PURPOSE / VISION / MISSION -->
-  <section class="section">
-    <div class="container">
-      <div class="pvm-grid">
-        <div class="pvm-card">
-          <div class="pvm-icon">P</div>
-          <h3>Purpose</h3>
-          <p>Promote an entrepreneurial culture among European students, encouraging creativity, initiative and the courage to pursue unconventional paths.</p>
-        </div>
-        <div class="pvm-card">
-          <div class="pvm-icon">V</div>
-          <h3>Vision</h3>
-          <p>Become the reference point for students oriented toward the startup world in Europe, recognised by founders and investors as a catalyst for entrepreneurial talent.</p>
-        </div>
-        <div class="pvm-card">
-          <div class="pvm-icon">M</div>
-          <h3>Mission</h3>
-          <p>Connect students and startups through concrete projects, fostering hands-on learning and building meaningful relationships across the innovation ecosystem.</p>
+      <div class="contact-form-wrap">
+        <div class="contact-form-card">
+          <h2>Send us a message</h2>
+          <!-- TODO: collegare a servizio invio email quando disponibile -->
+          <form class="contact-form" onsubmit="return false;">
+            <input type="text" placeholder="Full name" required>
+            <input type="email" placeholder="Email address" required>
+            <textarea placeholder="How can we help?" required></textarea>
+            <button type="submit" class="btn btn-green">Send Message</button>
+          </form>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="container">
-      <h2>Want to join the network as a student?</h2>
-      <p>Develop the next generation of entrepreneurial talent through concrete projects.</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform?usp=header" target="_blank" rel="noopener" class="btn btn-white">Join as a student</a>
     </div>
   </section>
 
