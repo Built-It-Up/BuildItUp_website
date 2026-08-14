@@ -268,6 +268,10 @@
     line-height: 1.6;
   }
 
+  .hero p.lead + p.lead {
+    margin-top: 12px;
+  }
+
   .hero .cta-row {
     margin-top: 38px;
     display: flex;
@@ -275,6 +279,60 @@
     justify-content: center;
     gap: 16px;
     flex-wrap: wrap;
+  }
+
+  /* Apply dropdown */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    font-family: inherit;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    background: var(--bu-white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    padding: 8px;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 50;
+    text-align: left;
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: flex;
+  }
+
+  .dropdown-menu a {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    transition: background 0.15s ease;
+  }
+
+  .dropdown-menu a:hover {
+    background: var(--bu-offwhite);
+  }
+
+  .dropdown-menu a strong {
+    color: var(--bu-black);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .dropdown-menu a span {
+    margin-top: 2px;
+    color: var(--bu-gray-text);
+    font-size: 0.85rem;
   }
 
   /* Stats bar */
@@ -752,7 +810,7 @@
       <nav>
         <ul class="nav-links">
           <li><a href="program.html">The Program</a></li>
-          <li><a href="#case-studies">Case Studies</a></li>
+          <li><a href="program.html#case-studies">Case Studies</a></li>
           <li><a href="events.html">Events &amp; Ecosystem</a></li>
           <li><a href="team.html">Team</a></li>
           <li><a href="#partners">Partners</a></li>
@@ -773,11 +831,24 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <span class="eyebrow">Fractional Founder's Associate</span>
+      <span class="eyebrow">Students as Fractional Founder's Associates</span>
       <h1>A team that builds<br>alongside your startup</h1>
-      <p class="lead">Not advisors from the outside, but students embedded in your growth — working hands-on on the projects that move the needle. A network of students, founders and investors since 2012.</p>
+      <p class="lead">Build It Up is a multi-university, non-profit association founded in 2012 that fills the gap between ambitious students and early-stage startups.</p>
+      <p class="lead">Not advisors from the outside, but students who work hands-on, directly on your projects.</p>
       <div class="cta-row">
-        <a href="https://forms.gle/hB77mHaVYogRDEQK8" target="_blank" rel="noopener noreferrer" class="btn btn-green">Apply to the program</a>
+        <div class="dropdown">
+          <button type="button" class="btn btn-green dropdown-toggle" aria-haspopup="true" aria-expanded="false">Apply to the program</button>
+          <div class="dropdown-menu">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform" target="_blank" rel="noopener noreferrer">
+              <strong>Startup</strong>
+              <span>Apply to the program</span>
+            </a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSc3svSoOjE63nDCVuBwk5lVp13OcLHHQ0KCFDD12lRF_s-BuA/viewform" target="_blank" rel="noopener noreferrer">
+              <strong>Student</strong>
+              <span>Join the association</span>
+            </a>
+          </div>
+        </div>
         <a href="#" class="btn btn-outline-green">Become a partner</a>
       </div>
     </div>
@@ -849,9 +920,9 @@
       <div class="section-head left">
         <div>
           <span class="eyebrow">Case studies</span>
-          <h2>Startups we've walked alongside</h2>
+          <h2>Some examples of startups we've worked alongside</h2>
         </div>
-        <a href="#" class="see-more">See the case studies <span>→</span></a>
+        <a href="program.html#case-studies" class="see-more">See the case studies <span>→</span></a>
       </div>
       <div class="case-grid">
         <div class="case-card">
@@ -902,15 +973,6 @@
     </div>
   </section>
 
-  <!-- QUOTE -->
-  <section class="quote-section">
-    <div class="container">
-      <p class="quote-text">"Build It Up provided us with valuable market insights and strategic recommendations while connecting us with highly motivated, professional students who delivered meaningful contributions. It was a truly rewarding collaboration."</p>
-      <div class="quote-author">Tensive</div>
-      <div class="quote-role">MedTech · Series A portfolio</div>
-    </div>
-  </section>
-
   <!-- PARTNER -->
   <section class="section offwhite" id="partners">
     <div class="container">
@@ -939,6 +1001,15 @@
     </div>
   </section>
 
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <div class="container">
+      <p class="quote-text">"Build It Up provided us with valuable market insights and strategic recommendations while connecting us with highly motivated, professional students who delivered meaningful contributions. It was a truly rewarding collaboration."</p>
+      <div class="quote-author">Tensive</div>
+      <div class="quote-role">MedTech · Series A portfolio</div>
+    </div>
+  </section>
+
   <!-- NEWSLETTER -->
   <section class="newsletter" id="newsletter">
     <div class="container">
@@ -963,7 +1034,7 @@
           <h4>Explore</h4>
           <ul>
             <li><a href="program.html">Program</a></li>
-            <li><a href="#case-studies">Case studies</a></li>
+            <li><a href="program.html#case-studies">Case studies</a></li>
             <li><a href="events.html">Events &amp; Ecosystem</a></li>
           </ul>
         </div>
@@ -1012,6 +1083,25 @@
       window.addEventListener('resize', function () {
         if (window.innerWidth >= 768) {
           closeMenu();
+        }
+      });
+    })();
+
+    (function () {
+      var dropdown = document.querySelector('.dropdown');
+      if (!dropdown) return;
+      var dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+
+      dropdownToggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = dropdown.classList.toggle('open');
+        dropdownToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove('open');
+          dropdownToggle.setAttribute('aria-expanded', 'false');
         }
       });
     })();
