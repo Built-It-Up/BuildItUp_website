@@ -446,14 +446,6 @@
     margin-bottom: 14px;
   }
 
-  .case-full-label {
-    color: var(--bu-gray-muted);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
   .case-full-top h3 {
     margin-top: 8px;
     font-weight: 700;
@@ -760,8 +752,7 @@
 
     .timeline-items {
       flex-direction: column;
-      align-items: flex-start;
-      gap: 32px;
+      gap: 0;
     }
 
     .timeline-line {
@@ -769,8 +760,27 @@
     }
 
     .timeline-item {
+      flex-direction: row;
       align-items: flex-start;
       text-align: left;
+      gap: 18px;
+      position: relative;
+      padding-bottom: 28px;
+    }
+
+    .timeline-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 12px;
+      top: 26px;
+      bottom: 0;
+      width: 2px;
+      background: var(--bu-border);
+    }
+
+    .timeline-dot {
+      margin-bottom: 0;
+      flex-shrink: 0;
     }
 
     .timeline-desc {
@@ -819,7 +829,7 @@
   <section class="program-intro" id="program-hero">
     <div class="container">
       <h2>The Program</h2>
-      <p>A dedicated team of students works hands-on on the projects that move the needle, with an integrated, flexible approach built around each startup's specific needs.</p>
+      <p>A dedicated team of students works hands-on on the projects that matter most, with an integrated, flexible approach built around each startup's specific needs.</p>
     </div>
   </section>
 
@@ -925,8 +935,7 @@
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Case Studies</span>
-        <h2>Four real journeys</h2>
-        <p>From deep-tech to healthtech, where our teams worked side by side with the founders.</p>
+        <h2>Some of our journeys</h2>
       </div>
 
       <div class="case-full-list">
@@ -935,8 +944,7 @@
           <div class="case-full-top">
             <div>
               <img class="case-full-logo" src="assets/img/case-studies/compri.png" alt="Compri logo">
-              <div class="case-full-label">Case Study · 01 — AI &amp; SaaS</div>
-              <h3>Compri × BIU</h3>
+              <h3>Compri</h3>
             </div>
             <span class="pill-amount">€5M · Seed</span>
           </div>
@@ -965,8 +973,7 @@
           <div class="case-full-top">
             <div>
               <img class="case-full-logo" src="assets/img/case-studies/tensive.png" alt="Tensive logo">
-              <div class="case-full-label">Case Study · 02 — MedTech</div>
-              <h3>Tensive × BIU</h3>
+              <h3>Tensive</h3>
             </div>
             <span class="pill-amount">€22.7M · Series A</span>
           </div>
@@ -995,8 +1002,7 @@
           <div class="case-full-top">
             <div>
               <img class="case-full-logo" src="assets/img/case-studies/galeio.png" alt="Galeio logo">
-              <div class="case-full-label">Case Study · 03 — Deep-Tech</div>
-              <h3>Galeio × BIU</h3>
+              <h3>Galeio</h3>
             </div>
             <span class="pill-amount">Station F · Paris</span>
           </div>
@@ -1025,12 +1031,11 @@
           <div class="case-full-top">
             <div>
               <img class="case-full-logo" src="assets/img/case-studies/rosso.png" alt="Rosso logo">
-              <div class="case-full-label">Case Study · 04 — HealthTech</div>
-              <h3>Rosso × BIU</h3>
+              <h3>Rosso</h3>
             </div>
             <span class="pill-amount">€3M · Seed</span>
           </div>
-          <p class="case-full-desc">A HealthTech startup building digital infrastructure for blood and plasma donation, founded by Chiara Schettino (2001) &amp; Filippo Toni (2006), among the youngest entrepreneurs in Italy.</p>
+          <p class="case-full-desc">A HealthTech startup building digital infrastructure for blood and plasma donation.</p>
           <p class="case-full-support"><strong>Result:</strong> Closed a €3M Seed round led by 360 Capital, with CDP Venture Capital and Angelini Investments</p>
           <hr class="thin-divider">
           <span class="results-label">Project Results</span>
@@ -1108,9 +1113,9 @@
   <!-- SECTION 6 — CTA -->
   <section class="cta-section">
     <div class="container">
-      <h2>Ready to build alongside a team?</h2>
+      <h2>Ready to join?</h2>
       <p>Applications for the October cohort are reviewed on a rolling basis.</p>
-      <a href="https://forms.gle/hB77mHaVYogRDEQK8" target="_blank" rel="noopener noreferrer" class="btn btn-white">Apply to the program</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-white">Apply to the program</a>
     </div>
   </section>
 
@@ -1126,7 +1131,7 @@
           <h4>Explore</h4>
           <ul>
             <li><a href="program.html">Program</a></li>
-            <li><a href="home.html#case-studies">Case studies</a></li>
+            <li><a href="program.html#case-studies">Case studies</a></li>
             <li><a href="events.html">Events &amp; Ecosystem</a></li>
           </ul>
         </div>
