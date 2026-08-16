@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(brew --version)",
+      "Bash(python3 -m pip install --quiet --user imageio-ffmpeg)",
+      "Bash(python3 -c \"import imageio_ffmpeg; print\\(imageio_ffmpeg.get_ffmpeg_exe\\(\\)\\)\")",
+      "Bash(mkdir -p /tmp/biu_preview)",
+      "Bash(sips -s format jpeg \"360_trek.HEIC\" --out /tmp/biu_preview/360_trek.jpg -Z 1200)",
+      "Bash(sips -s format jpeg \"BCG_trek.HEIC\" --out /tmp/biu_preview/BCG_trek.jpg -Z 1200)",
+      "Read(//tmp/**)",
+      "Read(//tmp/biu_preview/**)",
+      "Read(//private/tmp/biu_preview/**)"
+    ]
+  }
+}
