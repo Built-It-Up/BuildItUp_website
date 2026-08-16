@@ -281,89 +281,89 @@
   }
 
   /* Upcoming events */
-  .events-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .event-card {
+  .coming-soon-panel {
+    max-width: 560px;
+    margin: 0 auto;
     background: var(--bu-white);
     border-radius: var(--radius-lg);
     border-top: 3px solid var(--bu-green);
-    padding: 32px;
+    padding: 44px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+    text-align: center;
   }
 
-  .event-date {
-    color: var(--bu-green);
-    font-weight: 700;
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .event-card h3 {
-    margin-top: 14px;
+  .coming-soon-panel p {
     font-weight: 700;
     font-size: 1.2rem;
     color: var(--bu-black);
   }
 
-  .event-card p {
-    margin-top: 12px;
-    color: var(--bu-gray-text);
-    line-height: 1.6;
-    font-size: 0.95rem;
+  /* Gallery / Highlights — carousel */
+  .carousel {
+    max-width: 680px;
+    margin: 0 auto;
   }
 
-  .event-location {
-    margin-top: 18px;
-    color: var(--bu-gray-muted);
-    font-size: 0.85rem;
-    font-weight: 600;
-  }
-
-  /* Gallery / Highlights */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .gallery-item {
-    display: flex;
-    flex-direction: column;
+  .carousel-viewport {
     background: var(--bu-white);
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   }
 
-  .gallery-img-wrap {
-    flex: 1;
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
   }
 
-  .gallery-img-wrap img {
+  .carousel-slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+  }
+
+  .carousel-media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--bu-black);
+  }
+
+  .carousel-media img,
+  .carousel-media video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.35s ease;
   }
 
-  .gallery-item:hover .gallery-img-wrap img {
-    transform: scale(1.06);
-  }
-
-  .gallery-caption {
-    padding: 14px 18px;
+  .carousel-caption {
+    padding: 16px 20px;
     color: var(--bu-gray-text);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 500;
     line-height: 1.4;
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 22px;
+  }
+
+  .carousel-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bu-border);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .carousel-dot.active {
+    background: var(--bu-green);
+    transform: scale(1.3);
   }
 
   /* Automation Hackathon */
@@ -615,8 +615,8 @@
   }
 
   @media (max-width: 720px) {
-    .events-grid {
-      grid-template-columns: 1fr;
+    .coming-soon-panel {
+      padding: 32px 24px;
     }
 
     .hackathon-stats-grid {
@@ -632,29 +632,10 @@
     }
   }
 
-  @media (min-width: 641px) and (max-width: 900px) {
-    .gallery-grid {
-      grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 480px) {
+    .carousel-caption {
+      font-size: 0.85rem;
     }
-  }
-
-  @media (min-width: 901px) {
-    .gallery-grid {
-      grid-template-columns: repeat(4, 1fr);
-      grid-auto-rows: 200px;
-    }
-
-    .gallery-img-wrap {
-      aspect-ratio: auto;
-    }
-
-    .gallery-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 3; }
-    .gallery-item:nth-child(2) { grid-column: 3 / 4; grid-row: 1 / 2; }
-    .gallery-item:nth-child(3) { grid-column: 4 / 5; grid-row: 1 / 2; }
-    .gallery-item:nth-child(4) { grid-column: 3 / 4; grid-row: 2 / 3; }
-    .gallery-item:nth-child(5) { grid-column: 1 / 3; grid-row: 3 / 4; }
-    .gallery-item:nth-child(6) { grid-column: 4 / 5; grid-row: 2 / 3; }
-    .gallery-item:nth-child(7) { grid-column: 3 / 5; grid-row: 3 / 4; }
   }
 </style>
 </head>
@@ -690,37 +671,18 @@
     <div class="container">
       <span class="eyebrow">Events &amp; Ecosystem</span>
       <h1>Where the community comes together</h1>
-      <!-- placeholder, da rivedere quando avrò i contenuti definitivi -->
-      <p class="lead">From workshops to networking nights, discover how we build connections across the startup ecosystem.</p>
+      <p class="lead">From networking events and workshops to hackathons and community moments, discover how we build connections across the startup ecosystem.</p>
     </div>
   </section>
 
   <!-- UPCOMING EVENTS -->
-  <!-- TODO: sostituire con eventi reali -->
   <section class="section offwhite">
     <div class="container">
       <div class="section-head">
         <h2>Upcoming events</h2>
       </div>
-      <div class="events-grid">
-        <div class="event-card">
-          <div class="event-date">TBA</div>
-          <h3>Event Title</h3>
-          <p>Short description of the event goes here, with more details coming soon.</p>
-          <div class="event-location">Location TBA</div>
-        </div>
-        <div class="event-card">
-          <div class="event-date">TBA</div>
-          <h3>Event Title</h3>
-          <p>Short description of the event goes here, with more details coming soon.</p>
-          <div class="event-location">Location TBA</div>
-        </div>
-        <div class="event-card">
-          <div class="event-date">TBA</div>
-          <h3>Event Title</h3>
-          <p>Short description of the event goes here, with more details coming soon.</p>
-          <div class="event-location">Location TBA</div>
-        </div>
+      <div class="coming-soon-panel">
+        <p>A lot to be announced soon...</p>
       </div>
     </div>
   </section>
@@ -733,49 +695,50 @@
         <h2>Moments from our community</h2>
         <p>A look back at hackathons, talks, and time spent with founders and partners.</p>
       </div>
-      <div class="gallery-grid">
-        <figure class="gallery-item">
-          <div class="gallery-img-wrap">
-            <img src="assets/img/events/01-banca-generali-panel.png" alt="Investor Day hosted at Banca Generali's offices, one of our partners" loading="lazy">
+      <div class="carousel" id="moments-carousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <div class="carousel-media">
+                <video src="assets/img/events/12-bending-spoons.mp4" muted loop playsinline preload="auto"></video>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="carousel-media">
+                <video src="assets/img/events/13-bain-office.mp4" muted loop playsinline preload="auto"></video>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="carousel-media">
+                <img src="assets/img/events/01-banca-generali-panel.png" alt="Investor Day hosted at Banca Generali's offices" loading="lazy">
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="carousel-media">
+                <img src="assets/img/events/09-360-capital-workshop.jpg" alt="Workshop with 360 Capital" loading="lazy">
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="carousel-media">
+                <img src="assets/img/events/10-bcg-milan-visit.jpg" alt="Company visit at BCG Milan" loading="lazy">
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="carousel-media">
+                <img src="assets/img/events/14-jet-hr-visit.jpg" alt="Chat with Marco Ogliengo at Jet HR office" loading="lazy">
+              </div>
+            </div>
           </div>
-          <figcaption class="gallery-caption">Investor Day hosted at Banca Generali's offices, one of our partners</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <div class="gallery-img-wrap">
-            <img src="assets/img/events/03-automation-hackathon-flyer.png" alt="Automation Hackathon at Feat. House, Turin" loading="lazy">
-          </div>
-          <figcaption class="gallery-caption">Automation Hackathon at Feat. House, Turin</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <div class="gallery-img-wrap">
-            <img src="assets/img/events/04-bending-spoons-office.png" alt="Visiting Bending Spoons' office" loading="lazy">
-          </div>
-          <figcaption class="gallery-caption">Visiting Bending Spoons' office</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <div class="gallery-img-wrap">
-            <img src="assets/img/events/05-bain-company-office.png" alt="At Bain &amp; Company's offices" loading="lazy">
-          </div>
-          <figcaption class="gallery-caption">At Bain &amp; Company's offices</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <div class="gallery-img-wrap">
-            <img src="assets/img/events/06-hackathon-team-working.png" alt="Teams building during the hackathon" loading="lazy">
-          </div>
-          <figcaption class="gallery-caption">Teams building during the hackathon</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <div class="gallery-img-wrap">
-            <img src="assets/img/events/07-hackathon-team-discussion.png" alt="Mentoring session during the hackathon" loading="lazy">
-          </div>
-          <figcaption class="gallery-caption">Mentoring session during the hackathon</figcaption>
-        </figure>
-        <figure class="gallery-item">
-          <div class="gallery-img-wrap">
-            <img src="assets/img/events/08-buildup-keynote-stage.png" alt="Keynote on the big stage" loading="lazy">
-          </div>
-          <figcaption class="gallery-caption">Keynote on the big stage</figcaption>
-        </figure>
+          <p class="carousel-caption">Visiting Bending Spoons' office</p>
+        </div>
+        <div class="carousel-dots">
+          <button class="carousel-dot" data-caption="Visiting Bending Spoons' office" aria-label="Slide 1"></button>
+          <button class="carousel-dot" data-caption="Company visit at Bain office" aria-label="Slide 2"></button>
+          <button class="carousel-dot" data-caption="Investor Day hosted at Banca Generali's offices" aria-label="Slide 3"></button>
+          <button class="carousel-dot" data-caption="Workshop with 360 Capital" aria-label="Slide 4"></button>
+          <button class="carousel-dot" data-caption="Company visit at BCG Milan" aria-label="Slide 5"></button>
+          <button class="carousel-dot" data-caption="Chat with Marco Ogliengo at Jet HR office" aria-label="Slide 6"></button>
+        </div>
       </div>
     </div>
   </section>
@@ -790,8 +753,8 @@
 
       <div class="hackathon-stats-grid">
         <div class="stat-card">
-          <div class="big-num big-num-red">10 Hours</div>
-          <p>of non-stop building</p>
+          <div class="big-num big-num-red">10</div>
+          <p>hours of non-stop building</p>
         </div>
         <div class="stat-card">
           <div class="big-num">60</div>
@@ -813,7 +776,7 @@
 
       <div class="hackathon-photos-grid">
         <div class="hackathon-photo-item">
-          <img src="assets/img/events/03-automation-hackathon-flyer.png" alt="Automation Hackathon flyer" loading="lazy">
+          <img src="assets/img/events/11-hackathon-stage.jpg" alt="Speaker on stage at the Automation Hackathon" loading="lazy">
         </div>
         <div class="hackathon-photo-item">
           <img src="assets/img/events/06-hackathon-team-working.png" alt="Team working during the hackathon" loading="lazy">
@@ -825,7 +788,7 @@
 
       <div class="hackathon-banner">
         <p class="hackathon-banner-quote">"Our first hackathon, in collaboration with SITPolito: a room full of builders, a real challenge from Compri, and working solutions delivered in under 10 hours."</p>
-        <p class="hackathon-banner-meta">Supported by: Feat., n8n, ScrapeGraphAI and Manufact. Judges: Simone Giovo, Andriy Klitsuk and Ermanno Ronco.</p>
+        <p class="hackathon-banner-meta">Supported by: Feat Ventures. Judges: Andriy Klitsuk (Founder, Qubic Software House), Simone Giovo (Senior SWE) and Ermanno Ronco (Founding Account Executive, Compri).</p>
       </div>
     </div>
   </section>
@@ -903,6 +866,66 @@
           closeMenu();
         }
       });
+    })();
+
+    (function () {
+      var carousel = document.getElementById('moments-carousel');
+      if (!carousel) return;
+
+      var track = carousel.querySelector('.carousel-track');
+      var caption = carousel.querySelector('.carousel-caption');
+      var slides = Array.prototype.slice.call(carousel.querySelectorAll('.carousel-slide'));
+      var dots = Array.prototype.slice.call(carousel.querySelectorAll('.carousel-dot'));
+      var current = 0;
+      var timer;
+      var DELAY = 5000;
+
+      function updateVideos() {
+        slides.forEach(function (slide, i) {
+          var video = slide.querySelector('video');
+          if (!video) return;
+          if (i === current) {
+            video.currentTime = 0;
+            video.play().catch(function () {});
+          } else {
+            video.pause();
+          }
+        });
+      }
+
+      function goTo(index) {
+        current = (index + slides.length) % slides.length;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle('active', i === current);
+        });
+        caption.textContent = dots[current].getAttribute('data-caption');
+        updateVideos();
+      }
+
+      function startAuto() {
+        timer = setInterval(function () {
+          goTo(current + 1);
+        }, DELAY);
+      }
+
+      function stopAuto() {
+        clearInterval(timer);
+      }
+
+      dots.forEach(function (dot, i) {
+        dot.addEventListener('click', function () {
+          stopAuto();
+          goTo(i);
+          startAuto();
+        });
+      });
+
+      carousel.addEventListener('mouseenter', stopAuto);
+      carousel.addEventListener('mouseleave', startAuto);
+
+      goTo(0);
+      startAuto();
     })();
   </script>
 
