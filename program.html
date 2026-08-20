@@ -224,6 +224,60 @@
     transform: translateY(-7px) rotate(-45deg);
   }
 
+  /* Apply dropdown */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    font-family: inherit;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    background: var(--bu-white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    padding: 8px;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 50;
+    text-align: left;
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: flex;
+  }
+
+  .dropdown-menu a {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    transition: background 0.15s ease;
+  }
+
+  .dropdown-menu a:hover {
+    background: var(--bu-offwhite);
+  }
+
+  .dropdown-menu a strong {
+    color: var(--bu-black);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .dropdown-menu a span {
+    margin-top: 2px;
+    color: var(--bu-gray-text);
+    font-size: 0.85rem;
+  }
+
   /* Section headers */
   .section {
     padding: 100px 24px;
@@ -735,9 +789,25 @@
       border-bottom: none;
     }
 
-    .nav-links a.btn {
+    .nav-links a.btn,
+    .nav-links button.btn {
       margin: 16px 24px;
       display: inline-flex;
+      border-bottom: none;
+    }
+
+    .nav-links .dropdown-menu {
+      position: static;
+      transform: none;
+      width: auto;
+      box-shadow: none;
+      margin: 0 24px 12px;
+    }
+
+    .nav-links .dropdown-menu a {
+      display: flex;
+      flex-direction: column;
+      padding: 12px 14px;
       border-bottom: none;
     }
   }
@@ -809,9 +879,20 @@
           <li><a href="#case-studies">Case Studies</a></li>
           <li><a href="events.html">Events &amp; Ecosystem</a></li>
           <li><a href="team.html">Team</a></li>
-          <!-- TODO: collegare a pagina Partners quando pronta -->
-          <li><a href="#">Partners</a></li>
-          <li><a href="https://forms.gle/hB77mHaVYogRDEQK8" target="_blank" rel="noopener noreferrer" class="btn btn-green btn-sm">Apply</a></li>
+          <li><a href="home.html#partners">Partners</a></li>
+          <li class="dropdown">
+            <button type="button" class="btn btn-green btn-sm dropdown-toggle" aria-haspopup="true" aria-expanded="false">Apply</button>
+            <div class="dropdown-menu">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform" target="_blank" rel="noopener noreferrer">
+                <strong>Startup</strong>
+                <span>Apply to the program</span>
+              </a>
+              <a href="applications-soon.html">
+                <strong>Student</strong>
+                <span>Join the association</span>
+              </a>
+            </div>
+          </li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
         <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -1034,10 +1115,9 @@
             <span class="pill-amount">€3M · Seed</span>
           </div>
           <p class="case-full-desc">A HealthTech startup building digital infrastructure for blood and plasma donation.</p>
-          <p class="case-full-support"><strong>Result:</strong> Closed a €3M Seed round led by 360 Capital, with CDP Venture Capital and Angelini Investments</p>
           <hr class="thin-divider">
           <span class="results-label">Project Results</span>
-          <div class="results-grid cols-2">
+          <div class="results-grid">
             <div class="result-item">
               <h4>Investor mapping</h4>
               <p>Italian and international VCs, prioritised targets.</p>
@@ -1045,6 +1125,10 @@
             <div class="result-item">
               <h4>Valuation analysis</h4>
               <p>Comparable transactions and market multiples.</p>
+            </div>
+            <div class="result-item">
+              <h4>Closed the round</h4>
+              <p>€3M Seed round led by 360 Capital, with CDP Venture Capital and Angelini Investments.</p>
             </div>
           </div>
         </div>
@@ -1143,8 +1227,9 @@
         <div class="footer-col">
           <h4>Get involved</h4>
           <ul>
-            <li><a href="https://forms.gle/hB77mHaVYogRDEQK8" target="_blank" rel="noopener noreferrer">Apply</a></li>
-            <li><a href="#">Partner with us</a></li>
+            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform" target="_blank" rel="noopener noreferrer">Apply as a startup</a></li>
+            <li><a href="applications-soon.html">Apply as a student</a></li>
+            <li><a href="https://docs.google.com/forms/d/1qkSqLmLuvElwxIYKZzxFx5oTf3Dt_BNkE5HRlzoM7jU/viewform" target="_blank" rel="noopener noreferrer">Partner with us</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
@@ -1178,6 +1263,36 @@
         if (window.innerWidth >= 768) {
           closeMenu();
         }
+      });
+    })();
+
+    (function () {
+      var dropdowns = Array.prototype.slice.call(document.querySelectorAll('.dropdown'));
+      if (!dropdowns.length) return;
+
+      dropdowns.forEach(function (dropdown) {
+        var dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+
+        dropdownToggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var isOpen = dropdown.classList.toggle('open');
+          dropdownToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          dropdowns.forEach(function (other) {
+            if (other !== dropdown) {
+              other.classList.remove('open');
+              other.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      });
+
+      document.addEventListener('click', function (e) {
+        dropdowns.forEach(function (dropdown) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+            dropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+          }
+        });
       });
     })();
 

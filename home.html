@@ -775,9 +775,25 @@
       border-bottom: none;
     }
 
-    .nav-links a.btn {
+    .nav-links a.btn,
+    .nav-links button.btn {
       margin: 16px 24px;
       display: inline-flex;
+      border-bottom: none;
+    }
+
+    .nav-links .dropdown-menu {
+      position: static;
+      transform: none;
+      width: auto;
+      box-shadow: none;
+      margin: 0 24px 12px;
+    }
+
+    .nav-links .dropdown-menu a {
+      display: flex;
+      flex-direction: column;
+      padding: 12px 14px;
       border-bottom: none;
     }
   }
@@ -821,7 +837,19 @@
           <li><a href="events.html">Events &amp; Ecosystem</a></li>
           <li><a href="team.html">Team</a></li>
           <li><a href="#partners">Partners</a></li>
-          <li><a href="https://forms.gle/hB77mHaVYogRDEQK8" target="_blank" rel="noopener noreferrer" class="btn btn-green btn-sm">Apply</a></li>
+          <li class="dropdown">
+            <button type="button" class="btn btn-green btn-sm dropdown-toggle" aria-haspopup="true" aria-expanded="false">Apply</button>
+            <div class="dropdown-menu">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform" target="_blank" rel="noopener noreferrer">
+                <strong>Startup</strong>
+                <span>Apply to the program</span>
+              </a>
+              <a href="applications-soon.html">
+                <strong>Student</strong>
+                <span>Join the association</span>
+              </a>
+            </div>
+          </li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
         <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -848,13 +876,13 @@
               <strong>Startup</strong>
               <span>Apply to the program</span>
             </a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSc3svSoOjE63nDCVuBwk5lVp13OcLHHQ0KCFDD12lRF_s-BuA/viewform" target="_blank" rel="noopener noreferrer">
+            <a href="applications-soon.html">
               <strong>Student</strong>
               <span>Join the association</span>
             </a>
           </div>
         </div>
-        <a href="#" class="btn btn-outline-green">Become a partner</a>
+        <a href="https://docs.google.com/forms/d/1qkSqLmLuvElwxIYKZzxFx5oTf3Dt_BNkE5HRlzoM7jU/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-outline-green">Become a partner</a>
       </div>
     </div>
   </section>
@@ -1033,7 +1061,7 @@
     <div class="container">
       <div class="footer-top">
         <div>
-          <a href="#" class="logo-link"><img src="assets/img/logo-wordmark-white-green-red.png" alt="Build It Up" class="logo-img footer-logo-img"></a>
+          <a href="home.html" class="logo-link"><img src="assets/img/logo-wordmark-white-green-red.png" alt="Build It Up" class="logo-img footer-logo-img"></a>
           <p class="footer-tagline">A network of students, founders and investors since 2012, spreading an entrepreneurial mindset among younger generations in Europe.</p>
         </div>
         <div class="footer-col">
@@ -1054,8 +1082,9 @@
         <div class="footer-col">
           <h4>Get involved</h4>
           <ul>
-            <li><a href="https://forms.gle/hB77mHaVYogRDEQK8" target="_blank" rel="noopener noreferrer">Apply</a></li>
-            <li><a href="#">Partner with us</a></li>
+            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform" target="_blank" rel="noopener noreferrer">Apply as a startup</a></li>
+            <li><a href="applications-soon.html">Apply as a student</a></li>
+            <li><a href="https://docs.google.com/forms/d/1qkSqLmLuvElwxIYKZzxFx5oTf3Dt_BNkE5HRlzoM7jU/viewform" target="_blank" rel="noopener noreferrer">Partner with us</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
@@ -1093,21 +1122,32 @@
     })();
 
     (function () {
-      var dropdown = document.querySelector('.dropdown');
-      if (!dropdown) return;
-      var dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+      var dropdowns = Array.prototype.slice.call(document.querySelectorAll('.dropdown'));
+      if (!dropdowns.length) return;
 
-      dropdownToggle.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var isOpen = dropdown.classList.toggle('open');
-        dropdownToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      dropdowns.forEach(function (dropdown) {
+        var dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+
+        dropdownToggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var isOpen = dropdown.classList.toggle('open');
+          dropdownToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          dropdowns.forEach(function (other) {
+            if (other !== dropdown) {
+              other.classList.remove('open');
+              other.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
       });
 
       document.addEventListener('click', function (e) {
-        if (!dropdown.contains(e.target)) {
-          dropdown.classList.remove('open');
-          dropdownToggle.setAttribute('aria-expanded', 'false');
-        }
+        dropdowns.forEach(function (dropdown) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+            dropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+          }
+        });
       });
     })();
 

@@ -9,7 +9,9 @@
       "Bash(sips -s format jpeg \"BCG_trek.HEIC\" --out /tmp/biu_preview/BCG_trek.jpg -Z 1200)",
       "Read(//tmp/**)",
       "Read(//tmp/biu_preview/**)",
-      "Read(//private/tmp/biu_preview/**)"
+      "Read(//private/tmp/biu_preview/**)",
+      "Bash(node verify2.js)",
+      "Bash(node -e ' *)"
     ]
   }
 }
