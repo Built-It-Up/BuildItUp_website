@@ -221,10 +221,64 @@
     transform: translateY(-7px) rotate(-45deg);
   }
 
+  /* Apply dropdown */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    font-family: inherit;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    background: var(--bu-white);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+    padding: 8px;
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 50;
+    text-align: left;
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: flex;
+  }
+
+  .dropdown-menu a {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    transition: background 0.15s ease;
+  }
+
+  .dropdown-menu a:hover {
+    background: var(--bu-offwhite);
+  }
+
+  .dropdown-menu a strong {
+    color: var(--bu-black);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .dropdown-menu a span {
+    margin-top: 2px;
+    color: var(--bu-gray-text);
+    font-size: 0.85rem;
+  }
+
   /* Hero */
   .events-hero {
     background: var(--bu-offwhite);
-    padding: 100px 24px 110px;
+    padding: 100px 24px 50px;
     text-align: center;
 
     scroll-margin-top: 90px;
@@ -256,6 +310,10 @@
     scroll-margin-top: 90px;
   }
 
+  #gallery {
+    padding-bottom: 40px;
+  }
+
   .section.offwhite {
     background: var(--bu-offwhite);
   }
@@ -271,6 +329,13 @@
     font-weight: 700;
     font-size: clamp(1.9rem, 3.6vw, 2.8rem);
     color: var(--bu-black);
+  }
+
+  .section-head .highlights-title {
+    margin-top: 0;
+    color: var(--bu-green);
+    font-weight: 700;
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
   }
 
   .section-head p {
@@ -305,10 +370,47 @@
   }
 
   .carousel-viewport {
+    position: relative;
     background: var(--bu-white);
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.85);
+    color: #C7C7C7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .carousel-arrow:hover {
+    background: rgba(255, 255, 255, 0.95);
+    color: #A6A6A6;
+  }
+
+  .carousel-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .carousel-arrow-prev {
+    left: 12px;
+  }
+
+  .carousel-arrow-next {
+    right: 12px;
   }
 
   .carousel-track {
@@ -607,9 +709,25 @@
       border-bottom: none;
     }
 
-    .nav-links a.btn {
+    .nav-links a.btn,
+    .nav-links button.btn {
       margin: 16px 24px;
       display: inline-flex;
+      border-bottom: none;
+    }
+
+    .nav-links .dropdown-menu {
+      position: static;
+      transform: none;
+      width: auto;
+      box-shadow: none;
+      margin: 0 24px 12px;
+    }
+
+    .nav-links .dropdown-menu a {
+      display: flex;
+      flex-direction: column;
+      padding: 12px 14px;
       border-bottom: none;
     }
   }
@@ -652,7 +770,19 @@
           <li><a href="#events-hero" class="active">Events &amp; Ecosystem</a></li>
           <li><a href="team.html">Team</a></li>
           <li><a href="home.html#partners">Partners</a></li>
-          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc3svSoOjE63nDCVuBwk5lVp13OcLHHQ0KCFDD12lRF_s-BuA/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-green btn-sm">Apply</a></li>
+          <li class="dropdown">
+            <button type="button" class="btn btn-green btn-sm dropdown-toggle" aria-haspopup="true" aria-expanded="false">Apply</button>
+            <div class="dropdown-menu">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform" target="_blank" rel="noopener noreferrer">
+                <strong>Startup</strong>
+                <span>Apply to the program</span>
+              </a>
+              <a href="applications-soon.html">
+                <strong>Student</strong>
+                <span>Join the association</span>
+              </a>
+            </div>
+          </li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
         <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -673,28 +803,20 @@
     </div>
   </section>
 
-  <!-- UPCOMING EVENTS -->
-  <section class="section offwhite">
-    <div class="container">
-      <div class="section-head">
-        <h2>Upcoming events</h2>
-      </div>
-      <div class="coming-soon-panel">
-        <p>A lot to be announced soon...</p>
-      </div>
-    </div>
-  </section>
-
   <!-- GALLERY / HIGHLIGHTS -->
   <section class="section" id="gallery">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Highlights</span>
-        <h2>Moments from our community</h2>
-        <p>A look back at hackathons, talks, and time spent with founders and partners.</p>
+        <h2 class="highlights-title">Some moments from our community</h2>
       </div>
       <div class="carousel" id="moments-carousel">
         <div class="carousel-viewport">
+          <button type="button" class="carousel-arrow carousel-arrow-prev" aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button type="button" class="carousel-arrow carousel-arrow-next" aria-label="Next slide">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
           <div class="carousel-track">
             <div class="carousel-slide">
               <div class="carousel-media">
@@ -791,13 +913,24 @@
     </div>
   </section>
 
+  <!-- UPCOMING EVENTS -->
+  <section class="section offwhite">
+    <div class="container">
+      <div class="section-head">
+        <h2>Upcoming events</h2>
+      </div>
+      <div class="coming-soon-panel">
+        <p>A lot to be announced soon...</p>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta-section">
     <div class="container">
       <h2>Want to be part of it?</h2>
       <p>Join our events and connect with the ecosystem.</p>
-      <!-- TODO: collegare link corretto -->
-      <a href="#" class="btn btn-white">Get involved</a>
+      <a href="https://docs.google.com/forms/d/1qkSqLmLuvElwxIYKZzxFx5oTf3Dt_BNkE5HRlzoM7jU/viewform" target="_blank" rel="noopener noreferrer" class="btn btn-white">Get involved</a>
     </div>
   </section>
 
@@ -827,8 +960,9 @@
         <div class="footer-col">
           <h4>Get involved</h4>
           <ul>
-            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc3svSoOjE63nDCVuBwk5lVp13OcLHHQ0KCFDD12lRF_s-BuA/viewform" target="_blank" rel="noopener noreferrer">Apply</a></li>
-            <li><a href="#">Partner with us</a></li>
+            <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeF_TTpPaHkd-dvhTuFh5x-auw5hRSgM2RP-4FYg2GIerimiQ/viewform" target="_blank" rel="noopener noreferrer">Apply as a startup</a></li>
+            <li><a href="applications-soon.html">Apply as a student</a></li>
+            <li><a href="https://docs.google.com/forms/d/1qkSqLmLuvElwxIYKZzxFx5oTf3Dt_BNkE5HRlzoM7jU/viewform" target="_blank" rel="noopener noreferrer">Partner with us</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>
@@ -866,6 +1000,36 @@
     })();
 
     (function () {
+      var dropdowns = Array.prototype.slice.call(document.querySelectorAll('.dropdown'));
+      if (!dropdowns.length) return;
+
+      dropdowns.forEach(function (dropdown) {
+        var dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+
+        dropdownToggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var isOpen = dropdown.classList.toggle('open');
+          dropdownToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          dropdowns.forEach(function (other) {
+            if (other !== dropdown) {
+              other.classList.remove('open');
+              other.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      });
+
+      document.addEventListener('click', function (e) {
+        dropdowns.forEach(function (dropdown) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('open');
+            dropdown.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    })();
+
+    (function () {
       var carousel = document.getElementById('moments-carousel');
       if (!carousel) return;
 
@@ -873,6 +1037,8 @@
       var caption = carousel.querySelector('.carousel-caption');
       var slides = Array.prototype.slice.call(carousel.querySelectorAll('.carousel-slide'));
       var dots = Array.prototype.slice.call(carousel.querySelectorAll('.carousel-dot'));
+      var prevBtn = carousel.querySelector('.carousel-arrow-prev');
+      var nextBtn = carousel.querySelector('.carousel-arrow-next');
       var current = 0;
       var timer;
       var DELAY = 5000;
@@ -917,6 +1083,22 @@
           startAuto();
         });
       });
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', function () {
+          stopAuto();
+          goTo(current - 1);
+          startAuto();
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+          stopAuto();
+          goTo(current + 1);
+          startAuto();
+        });
+      }
 
       carousel.addEventListener('mouseenter', stopAuto);
       carousel.addEventListener('mouseleave', startAuto);
