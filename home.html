@@ -527,6 +527,65 @@
     line-height: 1.6;
   }
 
+  /* Batch preview */
+  #batch + #case-studies {
+    border-top: 1px solid var(--bu-border);
+  }
+
+  .batch-strip {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .batch-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 132px;
+    padding: 24px 16px 20px;
+    background: var(--bu-white);
+    border: 1px solid var(--bu-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+
+  .batch-tile-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+  }
+
+  .batch-tile-logo img {
+    max-height: 40px;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .batch-tile-sector {
+    color: var(--bu-gray-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .batch-strip {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .batch-strip {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   /* Quote */
   .quote-section {
     background: var(--bu-green-mint);
@@ -942,6 +1001,41 @@
           <div class="offer-num">05</div>
           <h3>Outreach</h3>
           <p>Lead generation and outreach to identify new opportunities for the sales process.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BATCH 2026/27 -->
+  <section class="section" id="batch">
+    <div class="container">
+      <div class="section-head left">
+        <div>
+          <span class="eyebrow">Batch 2026 / 2027</span>
+          <h2>The startups we're working with this year</h2>
+        </div>
+        <a href="program.html#batch" class="see-more">Meet the batch <span>→</span></a>
+      </div>
+      <div class="batch-strip">
+        <div class="batch-tile">
+          <div class="batch-tile-logo"><img src="assets/img/batch/pillar.png" alt="Pillar logo"></div>
+          <span class="batch-tile-sector">Workflow automation</span>
+        </div>
+        <div class="batch-tile">
+          <div class="batch-tile-logo"><img src="assets/img/batch/iusful.png" alt="ius·ful logo"></div>
+          <span class="batch-tile-sector">Legaltech</span>
+        </div>
+        <div class="batch-tile">
+          <div class="batch-tile-logo"><img src="assets/img/batch/cassandra.png" alt="cassandra logo"></div>
+          <span class="batch-tile-sector">Martech</span>
+        </div>
+        <div class="batch-tile">
+          <div class="batch-tile-logo"><img src="assets/img/batch/principled-intelligence.png" alt="Principled Intelligence logo"></div>
+          <span class="batch-tile-sector">AI</span>
+        </div>
+        <div class="batch-tile">
+          <div class="batch-tile-logo"><img src="assets/img/batch/stealth.png" alt="Stealth healthtech startup logo"></div>
+          <span class="batch-tile-sector">Healthtech · In stealth</span>
         </div>
       </div>
     </div>

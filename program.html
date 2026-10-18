@@ -578,6 +578,117 @@
     line-height: 1.55;
   }
 
+  /* Batch 2026/27 */
+  #batch + #case-studies {
+    border-top: 1px solid var(--bu-border);
+  }
+
+  .batch-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .batch-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    gap: 32px;
+    background: var(--bu-white);
+    border: 1px solid var(--bu-border);
+    border-radius: var(--radius-lg);
+    padding: 28px 36px;
+  }
+
+  .batch-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 64px;
+  }
+
+  .batch-logo img {
+    max-height: 44px;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .batch-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .batch-tag {
+    background: var(--bu-green-mint);
+    color: var(--bu-green);
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+  }
+
+  .batch-raised {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--bu-black);
+  }
+
+  .batch-backed {
+    margin-top: 10px;
+    color: var(--bu-gray-text);
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .batch-work {
+    margin-top: 8px;
+    color: var(--bu-green);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .batch-investors {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--bu-border);
+    text-align: center;
+  }
+
+  .batch-investors-label {
+    display: block;
+    margin-bottom: 20px;
+    color: var(--bu-gray-muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .batch-investors ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .batch-investors li {
+    background: var(--bu-white);
+    border: 1px solid var(--bu-border);
+    border-radius: var(--radius-pill);
+    padding: 8px 18px;
+    color: var(--bu-black);
+    font-size: 0.85rem;
+  }
+
   /* Section 5 — FAQ */
   .faq-list {
     max-width: 820px;
@@ -861,6 +972,16 @@
       padding: 28px;
     }
 
+    .batch-card {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 24px;
+    }
+
+    .batch-logo {
+      height: 48px;
+    }
+
     .footer-top {
       grid-template-columns: 1fr;
     }
@@ -1005,6 +1126,103 @@
         <div class="service-note">
           <p>Every service above is tailor-made, shaped around your startup's stage, sector and specific needs, not delivered off-the-shelf.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3b — CURRENT BATCH 2026/27 -->
+  <section class="section" id="batch">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Batch 2026 / 2027</span>
+        <h2>Meet the startups you'll work with</h2>
+        <p>This year's lineup, straight from Italy's startup scene.</p>
+      </div>
+
+      <div class="batch-list">
+        <!-- Pillar -->
+        <div class="batch-card">
+          <div class="batch-logo"><img src="assets/img/batch/pillar.png" alt="Pillar logo"></div>
+          <div class="batch-body">
+            <div class="batch-top">
+              <span class="batch-tag">Workflow automation</span>
+              <span class="batch-raised">€15M raised</span>
+            </div>
+            <p class="batch-backed">Backed by Base10, Earlybird, Italian Founders Fund, Emblem and Vento</p>
+            <p class="batch-work">Working with BIU: competitor and foreign market analysis</p>
+          </div>
+        </div>
+
+        <!-- ius·ful -->
+        <div class="batch-card">
+          <div class="batch-logo"><img src="assets/img/batch/iusful.png" alt="ius·ful logo"></div>
+          <div class="batch-body">
+            <div class="batch-top">
+              <span class="batch-tag">Legaltech</span>
+              <span class="batch-raised">€2M raised</span>
+            </div>
+            <p class="batch-backed">Backed by Italian Founders Fund, Vento, United Ventures, Alecla7 and H14</p>
+            <p class="batch-work">Working with BIU: legal verticals and GTM strategy</p>
+          </div>
+        </div>
+
+        <!-- cassandra -->
+        <div class="batch-card">
+          <div class="batch-logo"><img src="assets/img/batch/cassandra.png" alt="cassandra logo"></div>
+          <div class="batch-body">
+            <div class="batch-top">
+              <span class="batch-tag">Martech</span>
+              <span class="batch-raised">€2M raised</span>
+            </div>
+            <p class="batch-backed">Backed by Italian Founders Fund, Mana Ventures and Vento</p>
+            <p class="batch-work">Working with BIU: marketing and go-to-market</p>
+          </div>
+        </div>
+
+        <!-- Principled Intelligence -->
+        <div class="batch-card">
+          <div class="batch-logo"><img src="assets/img/batch/principled-intelligence.png" alt="Principled Intelligence logo"></div>
+          <div class="batch-body">
+            <div class="batch-top">
+              <span class="batch-tag">AI</span>
+              <span class="batch-raised">€1.8M raised</span>
+            </div>
+            <p class="batch-backed">Backed by Polo Nazionale di Trasferimento Tecnologico per l'Intelligenza Artificiale (by CDP Venture Capital and Scientifica Venture Capital), BlackSheep Ventures and Eden Ventures</p>
+            <p class="batch-work">Working with BIU: GTM, events and partnerships</p>
+          </div>
+        </div>
+
+        <!-- Stealth healthtech -->
+        <div class="batch-card">
+          <div class="batch-logo"><img src="assets/img/batch/stealth.png" alt="Stealth healthtech startup logo"></div>
+          <div class="batch-body">
+            <div class="batch-top">
+              <span class="batch-tag">Healthtech</span>
+              <span class="batch-raised">In stealth</span>
+            </div>
+            <p class="batch-backed">Backed for +€1.8M</p>
+            <p class="batch-work">Working with BIU: building the marketing engine</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="batch-investors">
+        <span class="batch-investors-label">With conviction from</span>
+        <ul>
+          <li>Italian Founders Fund</li>
+          <li>Vento</li>
+          <li>United Ventures</li>
+          <li>Base10</li>
+          <li>Earlybird</li>
+          <li>Emblem</li>
+          <li>CDP Venture Capital</li>
+          <li>Mana Ventures</li>
+          <li>Alecla7</li>
+          <li>H14</li>
+          <li>BlackSheep</li>
+          <li>Eden Ventures</li>
+          <li>Polo SophIA</li>
+        </ul>
       </div>
     </div>
   </section>
