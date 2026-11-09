@@ -769,6 +769,477 @@
       font-size: 0.85rem;
     }
   }
+
+  /* ===== Events timeline ===== */
+  .timeline-lead {
+    margin-top: 18px;
+    color: var(--bu-gray-text);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  /* "Next event" pill + filters */
+  .tl-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin: -20px auto 44px;
+  }
+
+  .tl-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: var(--bu-white);
+    border: 1px solid var(--bu-green);
+    border-radius: var(--radius-pill);
+    font-size: 0.92rem;
+    color: var(--bu-black);
+  }
+
+  .tl-next[hidden] { display: none; }
+
+  .tl-next b { color: var(--bu-green); font-weight: 700; }
+
+  .tl-next-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--bu-green);
+    animation: tl-pulse 2s ease-out infinite;
+  }
+
+  .tl-filters {
+    display: inline-flex;
+    gap: 6px;
+    padding: 5px;
+    background: var(--bu-white);
+    border: 1px solid var(--bu-border);
+    border-radius: var(--radius-pill);
+  }
+
+  .tl-filter {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    font: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--bu-gray-text);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .tl-filter:hover { color: var(--bu-black); }
+
+  .tl-filter[aria-pressed="true"] {
+    background: var(--bu-green);
+    color: var(--bu-white);
+  }
+
+  .tl-filter:focus-visible,
+  .tl-toggle:focus-visible {
+    outline: 3px solid var(--bu-green);
+    outline-offset: 2px;
+  }
+
+  .tl-empty {
+    max-width: 920px;
+    margin: 0 auto 24px;
+    padding: 28px;
+    text-align: center;
+    color: var(--bu-gray-text);
+    background: var(--bu-white);
+    border: 1px dashed var(--bu-border);
+    border-radius: var(--radius-md);
+  }
+
+  .tl-empty[hidden] { display: none; }
+
+  .timeline {
+    list-style: none;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 150px 44px minmax(0, 1fr);
+    column-gap: 20px;
+    position: relative;
+  }
+
+  .tl-item[hidden] { display: none; }
+
+  .tl-date {
+    padding-top: 26px;
+    text-align: right;
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1.45;
+    color: var(--bu-red);
+  }
+
+  .tl-date span { display: block; }
+
+  .tl-rail {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .tl-rail::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background: var(--bu-green);
+    opacity: 0.35;
+  }
+
+  .tl-item.is-first .tl-rail::before { top: 36px; }
+  .tl-item.is-last .tl-rail::before { bottom: calc(100% - 36px); }
+
+  .tl-dot {
+    position: relative;
+    z-index: 1;
+    margin-top: 26px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bu-green);
+    border: 3px solid var(--bu-offwhite);
+    box-shadow: 0 0 0 2px var(--bu-green);
+    box-sizing: content-box;
+  }
+
+  .tl-item.tbc .tl-dot { background: var(--bu-offwhite); }
+
+  .tl-item.next .tl-dot { animation: tl-pulse 2s ease-out infinite; }
+
+  @keyframes tl-pulse {
+    0%   { box-shadow: 0 0 0 2px var(--bu-green), 0 0 0 2px rgba(0,125,98,0.45); }
+    100% { box-shadow: 0 0 0 2px var(--bu-green), 0 0 0 14px rgba(0,125,98,0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tl-item.next .tl-dot,
+    .tl-next-dot { animation: none; }
+  }
+
+  .tl-card {
+    margin: 0 0 24px;
+    padding: 24px 28px;
+    background: var(--bu-white);
+    border: 1px solid var(--bu-border);
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .tl-item.past .tl-card { border-color: var(--bu-green); }
+
+  .tl-card.is-open {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  }
+
+  #timeline.tl-js .tl-head,
+  #timeline.tl-js .tl-desc { cursor: pointer; }
+
+  .tl-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .tl-icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--bu-green-mint);
+    color: var(--bu-green);
+  }
+
+  .tl-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .tl-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.25;
+  }
+
+  .tl-meta {
+    margin: 4px 0 0;
+    color: var(--bu-gray-text);
+    font-size: 0.92rem;
+  }
+
+  .tl-badge {
+    margin-left: auto;
+    flex: 0 0 auto;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--bu-offwhite);
+    color: var(--bu-gray-text);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .tl-item.next .tl-badge { background: var(--bu-green); color: var(--bu-white); }
+  .tl-item.past .tl-badge { background: var(--bu-green-mint); color: var(--bu-green); }
+
+  .tl-desc {
+    margin: 16px 0 0;
+    color: var(--bu-gray-text);
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  /* "More details" button */
+  .tl-toggle {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--bu-green);
+    cursor: pointer;
+  }
+
+  #timeline.tl-js .tl-toggle { display: inline-flex; }
+
+  .tl-toggle svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.3s ease;
+  }
+
+  .tl-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+  /* Expandable panel: animates between 0 and its natural height */
+  #timeline.tl-js .tl-more {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    transition: grid-template-rows 0.35s ease, visibility 0s linear 0.35s;
+  }
+
+  #timeline.tl-js .tl-card.is-open .tl-more {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    transition: grid-template-rows 0.35s ease, visibility 0s;
+  }
+
+  .tl-more-inner {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .tl-more-body {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--bu-border);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #timeline.tl-js .tl-more,
+    #timeline.tl-js .tl-card.is-open .tl-more { transition: none; }
+    .tl-toggle svg { transition: none; }
+  }
+
+  .tl-text {
+    margin: 0 0 18px;
+    color: var(--bu-black);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .tl-facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px 24px;
+    margin: 0;
+  }
+
+  .tl-facts div { min-width: 0; }
+
+  .tl-facts dt {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bu-gray-muted);
+  }
+
+  .tl-facts dd {
+    margin: 4px 0 0;
+    font-size: 0.98rem;
+    font-weight: 600;
+  }
+
+  .tl-link {
+    display: inline-block;
+    margin-top: 18px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--bu-green);
+    text-decoration: none;
+    border-bottom: 2px solid var(--bu-green-mint-dark);
+  }
+
+  .tl-link:hover { border-bottom-color: var(--bu-green); }
+
+  .tl-link-inline { color: var(--bu-green); font-weight: 700; }
+
+  .tl-photos {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .tl-photos img {
+    height: 240px;
+    min-width: 0;
+    object-fit: cover;
+    border-radius: 14px;
+  }
+
+  .tl-photos img.wide { flex: 1.6 1 0; }
+  .tl-photos img.tall { flex: 1 1 0; object-position: center 30%; }
+
+  .tl-monthly {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 920px;
+    margin: 16px auto 0;
+    padding: 24px 28px;
+    background: var(--bu-black);
+    color: var(--bu-white);
+    border-radius: var(--radius-md);
+  }
+
+  .tl-monthly .tl-icon {
+    background: rgba(255,255,255,0.1);
+    color: var(--bu-white);
+  }
+
+  .tl-monthly-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9fd8c8;
+  }
+
+  .tl-monthly h3 { margin: 4px 0 0; font-size: 1.2rem; font-weight: 700; }
+
+  .tl-monthly p {
+    margin: 4px 0 0;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.92rem;
+  }
+
+  .tl-legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+    color: var(--bu-gray-text);
+    font-size: 0.88rem;
+  }
+
+  .tl-legend span { display: inline-flex; align-items: center; gap: 8px; }
+
+  .tl-legend i {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--bu-green);
+    box-shadow: 0 0 0 2px var(--bu-green);
+    border: 2px solid var(--bu-offwhite);
+    box-sizing: content-box;
+  }
+
+  .tl-legend i.hollow { background: var(--bu-offwhite); }
+
+  @media (max-width: 720px) {
+    .tl-toolbar { margin-top: -28px; }
+
+    .tl-item {
+      grid-template-columns: 28px minmax(0, 1fr);
+      column-gap: 12px;
+    }
+
+    .tl-date {
+      grid-column: 2;
+      grid-row: 1;
+      padding-top: 0;
+      margin-bottom: 8px;
+      text-align: left;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 10px;
+    }
+
+    .tl-rail { grid-column: 1; grid-row: 1 / span 2; }
+
+    .tl-dot { margin-top: 4px; }
+    .tl-item.is-first .tl-rail::before { top: 14px; }
+    .tl-item.is-last .tl-rail::before { bottom: calc(100% - 14px); }
+
+    .tl-card { grid-column: 2; grid-row: 2; padding: 20px; }
+
+    .tl-head {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      column-gap: 14px;
+      row-gap: 10px;
+      align-items: center;
+    }
+
+    .tl-badge { grid-column: 2; justify-self: start; margin-left: 0; }
+    .tl-photos { flex-direction: column; }
+    .tl-photos img { height: auto; width: 100%; flex: none; }
+    .tl-photos img.wide { aspect-ratio: 4 / 3; }
+    .tl-photos img.tall { aspect-ratio: 3 / 4; max-height: 360px; }
+    .tl-monthly { padding: 20px; }
+  }
 </style>
 </head>
 <body>
@@ -814,6 +1285,201 @@
       <span class="eyebrow">Events &amp; Ecosystem</span>
       <h1>Where the community comes together</h1>
       <p class="lead">From networking events and workshops to hackathons and community moments, discover how we build connections across the startup ecosystem.</p>
+    </div>
+  </section>
+
+  <!-- EVENTS TIMELINE -->
+  <section class="section offwhite" id="timeline">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Calendar 2026–2027</span>
+        <h2>Our events, past and upcoming</h2>
+        <p class="timeline-lead">Everything we run during the academic year. Open an event to see the details.</p>
+      </div>
+      <div class="tl-toolbar">
+        <div class="tl-next" id="tl-next" hidden><span class="tl-next-dot"></span><span id="tl-next-text"></span></div>
+        <div class="tl-filters" role="group" aria-label="Filter events">
+          <button class="tl-filter" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="tl-filter" type="button" data-filter="upcoming" aria-pressed="false">Upcoming</button>
+          <button class="tl-filter" type="button" data-filter="past" aria-pressed="false">Past</button>
+        </div>
+      </div>
+      <ol class="timeline" id="tl-list">
+        <li class="tl-item past is-first" data-start="2026-11-04" data-end="2026-11-04">
+          <div class="tl-date"><span>Nov 4</span></div>
+          <div class="tl-rail"><span class="tl-dot"></span></div>
+          <div class="tl-card" data-open="true">
+            <div class="tl-head">
+              <span class="tl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span>
+              <div>
+                <h3 class="tl-title">Startup for Beginners</h3>
+                <p class="tl-meta">Turin · OGR Tech</p>
+              </div>
+              <span class="tl-badge">Past</span>
+            </div>
+            <p class="tl-desc">An evening at OGR Tech, organised together with Talent Garden.</p>
+            <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-startup-for-beginners">
+              <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="tl-more" id="tl-more-startup-for-beginners">
+              <div class="tl-more-inner">
+                <div class="tl-more-body">
+                  <p class="tl-text">Build It Up presented the services it can provide to startups. Sebastiano Andreis of Navis AI then gave a talk on the changes of direction a startup goes through along its journey.</p>
+                  <dl class="tl-facts"><div><dt>Where</dt><dd>OGR Tech, Turin</dd></div><div><dt>Organised with</dt><dd>Talent Garden</dd></div><div><dt>Speaker</dt><dd>Sebastiano Andreis, Navis AI</dd></div></dl>
+              <div class="tl-photos">
+                <img class="wide" src="assets/img/events/19-startup-for-beginners-audience.jpg" alt="The audience at Startup for Beginners at OGR Tech in Turin" loading="lazy">
+                <img class="tall" src="assets/img/events/20-startup-for-beginners-talk.jpg" alt="A Build It Up member presenting the network at Startup for Beginners" loading="lazy">
+              </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item" data-start="2026-11-10" data-end="2026-11-10">
+          <div class="tl-date"><span>Nov 10</span></div>
+          <div class="tl-rail"><span class="tl-dot"></span></div>
+          <div class="tl-card">
+            <div class="tl-head">
+              <span class="tl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></span>
+              <div>
+                <h3 class="tl-title">GTM School – BIU Labs</h3>
+                <p class="tl-meta">Online · Matteo Monge</p>
+              </div>
+              <span class="tl-badge">Upcoming</span>
+            </div>
+            <p class="tl-desc">An online session with Matteo Monge, part of our BIU Labs.</p>
+            <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-gtm-school">
+              <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="tl-more" id="tl-more-gtm-school">
+              <div class="tl-more-inner">
+                <div class="tl-more-body">
+                  <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
+                  <dl class="tl-facts"><div><dt>Where</dt><dd>Online</dd></div><div><dt>Speaker</dt><dd>Matteo Monge</dd></div><div><dt>Series</dt><dd>BIU Labs</dd></div></dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item tbc">
+          <div class="tl-date"><span>Jan 15</span><span>Feb 15</span></div>
+          <div class="tl-rail"><span class="tl-dot"></span></div>
+          <div class="tl-card">
+            <div class="tl-head">
+              <span class="tl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg></span>
+              <div>
+                <h3 class="tl-title">Club degli Investitori</h3>
+                <p class="tl-meta">Turin</p>
+              </div>
+              <span class="tl-badge">Upcoming</span>
+            </div>
+            <p class="tl-desc">Two dates in Turin, still to be confirmed.</p>
+            <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-club-investitori">
+              <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="tl-more" id="tl-more-club-investitori">
+              <div class="tl-more-inner">
+                <div class="tl-more-body">
+                  <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
+                  <dl class="tl-facts"><div><dt>Where</dt><dd>Turin</dd></div><div><dt>Dates</dt><dd>Jan 15 and Feb 15 (to be confirmed)</dd></div></dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item tbc">
+          <div class="tl-date"><span>Mar 4–5</span><span>Mar 18–19</span></div>
+          <div class="tl-rail"><span class="tl-dot"></span></div>
+          <div class="tl-card">
+            <div class="tl-head">
+              <span class="tl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20l6-11 4 6 3-4 5 9H3z"/></svg></span>
+              <div>
+                <h3 class="tl-title">Trek</h3>
+                <p class="tl-meta">Milan</p>
+              </div>
+              <span class="tl-badge">Upcoming</span>
+            </div>
+            <p class="tl-desc">Two dates in Milan, still to be confirmed.</p>
+            <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-trek">
+              <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="tl-more" id="tl-more-trek">
+              <div class="tl-more-inner">
+                <div class="tl-more-body">
+                  <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
+                  <dl class="tl-facts"><div><dt>Where</dt><dd>Milan</dd></div><div><dt>Dates</dt><dd>Mar 4–5 and Mar 18–19 (to be confirmed)</dd></div></dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item tbc">
+          <div class="tl-date"><span>Mar 6</span><span>Mar 20</span></div>
+          <div class="tl-rail"><span class="tl-dot"></span></div>
+          <div class="tl-card">
+            <div class="tl-head">
+              <span class="tl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
+              <div>
+                <h3 class="tl-title">Hackathon</h3>
+                <p class="tl-meta">Turin</p>
+              </div>
+              <span class="tl-badge">Upcoming</span>
+            </div>
+            <p class="tl-desc">Our hackathon returns, with dates still to be confirmed.</p>
+            <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-hackathon">
+              <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="tl-more" id="tl-more-hackathon">
+              <div class="tl-more-inner">
+                <div class="tl-more-body">
+                  <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
+                  <dl class="tl-facts"><div><dt>Where</dt><dd>Turin</dd></div><div><dt>Dates</dt><dd>Mar 6 and Mar 20 (to be confirmed)</dd></div></dl>
+              <a class="tl-link" href="#hackathon">See our first hackathon →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item is-last">
+          <div class="tl-date"><span>June</span></div>
+          <div class="tl-rail"><span class="tl-dot"></span></div>
+          <div class="tl-card">
+            <div class="tl-head">
+              <span class="tl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9"/></svg></span>
+              <div>
+                <h3 class="tl-title">BIU Day</h3>
+                <p class="tl-meta">Location TBD</p>
+              </div>
+              <span class="tl-badge">Upcoming</span>
+            </div>
+            <p class="tl-desc">Our June event. Location to be defined.</p>
+            <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-biu-day">
+              <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="tl-more" id="tl-more-biu-day">
+              <div class="tl-more-inner">
+                <div class="tl-more-body">
+                  <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
+                  <dl class="tl-facts"><div><dt>When</dt><dd>June</dd></div><div><dt>Where</dt><dd>To be defined</dd></div></dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ol>
+      <p class="tl-empty" id="tl-empty" hidden>Nothing here yet.</p>
+      <div class="tl-monthly">
+        <span class="tl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></span>
+        <div>
+          <span class="tl-monthly-label">Every month</span>
+          <h3>Labs / Talk</h3>
+          <p>One event a month · dates TBD</p>
+        </div>
+      </div>
+      <div class="tl-legend">
+        <span><i></i> Date confirmed</span>
+        <span><i class="hollow"></i> Date to be confirmed</span>
+      </div>
     </div>
   </section>
 
@@ -949,18 +1615,6 @@
       <div class="hackathon-banner">
         <p class="hackathon-banner-quote">"Our first hackathon, in collaboration with SITPolito: a room full of builders, a real challenge from Compri, and working solutions delivered in under 10 hours."</p>
         <p class="hackathon-banner-meta">Supported by: Feat Ventures. Judges: Andriy Klitsuk (Founder, Qubic Software House), Simone Giovo (Senior SWE) and Ermanno Ronco (Founding Account Executive, Compri).</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- UPCOMING EVENTS -->
-  <section class="section offwhite">
-    <div class="container">
-      <div class="section-head">
-        <h2>Upcoming events</h2>
-      </div>
-      <div class="coming-soon-panel">
-        <p>A lot to be announced soon...</p>
       </div>
     </div>
   </section>
@@ -1145,6 +1799,103 @@
 
       goTo(0);
       startAuto();
+    })();
+  </script>
+
+  <script>
+    // Events timeline: expandable cards, filters, "next event" pill
+    (function () {
+      var root = document.getElementById('timeline');
+      if (!root) return;
+      root.classList.add('tl-js');
+
+      var items = Array.prototype.slice.call(root.querySelectorAll('.tl-item'));
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      function parse(str) {
+        var p = str.split('-');
+        return new Date(+p[0], +p[1] - 1, +p[2]);
+      }
+
+      function setBadge(li, label) {
+        li.querySelector('.tl-badge').textContent = label;
+      }
+
+      // 1) Work out which events are past / next, so the page updates itself over time
+      var next = null;
+      items.forEach(function (li) {
+        var end = li.getAttribute('data-end');
+        if (!end) return;
+        if (parse(end) < today) {
+          li.classList.remove('next');
+          li.classList.add('past');
+          setBadge(li, 'Past');
+        } else if (!next || parse(li.getAttribute('data-start')) < parse(next.getAttribute('data-start'))) {
+          next = li;
+        }
+      });
+      if (next) {
+        next.classList.add('next');
+        setBadge(next, 'Next up');
+        var days = Math.round((parse(next.getAttribute('data-start')) - today) / 86400000);
+        var when = days <= 0 ? 'today' : days === 1 ? 'tomorrow' : 'in ' + days + ' days';
+        var pill = document.getElementById('tl-next');
+        document.getElementById('tl-next-text').innerHTML =
+          'Next event: <b>' + next.querySelector('.tl-title').textContent + '</b> · ' + when;
+        pill.hidden = false;
+      }
+
+      // 2) Expandable cards (one open at a time)
+      function setOpen(card, open) {
+        var btn = card.querySelector('.tl-toggle');
+        var panel = card.querySelector('.tl-more-inner');
+        card.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.querySelector('.tl-toggle-label').textContent = open ? 'Hide details' : 'More details';
+        if (open) { panel.removeAttribute('inert'); } else { panel.setAttribute('inert', ''); }
+      }
+
+      var cards = Array.prototype.slice.call(root.querySelectorAll('.tl-card'));
+      cards.forEach(function (card) {
+        setOpen(card, card.getAttribute('data-open') === 'true');
+        function toggle() {
+          var willOpen = !card.classList.contains('is-open');
+          cards.forEach(function (c) { if (c !== card) setOpen(c, false); });
+          setOpen(card, willOpen);
+        }
+        card.querySelector('.tl-toggle').addEventListener('click', toggle);
+        card.querySelector('.tl-head').addEventListener('click', toggle);
+        card.querySelector('.tl-desc').addEventListener('click', toggle);
+      });
+
+      // 3) Filters
+      var filters = Array.prototype.slice.call(root.querySelectorAll('.tl-filter'));
+      var empty = document.getElementById('tl-empty');
+
+      function applyFilter(kind) {
+        var visible = [];
+        items.forEach(function (li) {
+          var isPast = li.classList.contains('past');
+          var show = kind === 'all' || (kind === 'past' && isPast) || (kind === 'upcoming' && !isPast);
+          li.hidden = !show;
+          li.classList.remove('is-first', 'is-last');
+          if (show) visible.push(li);
+        });
+        if (visible.length) {
+          visible[0].classList.add('is-first');
+          visible[visible.length - 1].classList.add('is-last');
+        }
+        empty.hidden = visible.length > 0;
+      }
+
+      filters.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filters.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+          applyFilter(btn.getAttribute('data-filter'));
+        });
+      });
+      applyFilter('all');
     })();
   </script>
 
