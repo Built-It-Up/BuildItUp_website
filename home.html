@@ -436,9 +436,50 @@
     box-shadow: 0 4px 24px rgba(0,0,0,0.05);
   }
 
-  .offer-card:last-child {
-    grid-column: 1 / -1;
-    max-width: calc(50% - 12px);
+  .offer-photo {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+    min-height: 300px;
+  }
+
+  .offer-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 78%;
+  }
+
+  /* Life at Build It Up: photo mosaic */
+  .life-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 240px;
+    gap: 16px;
+  }
+
+  .life-photo {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--bu-offwhite);
+  }
+
+  .life-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .life-photo:hover img {
+    transform: scale(1.04);
+  }
+
+  .life-photo.big {
+    grid-column: span 2;
+    grid-row: span 2;
   }
 
   .offer-num {
@@ -863,8 +904,18 @@
       grid-template-columns: 1fr;
     }
 
-    .offer-card:last-child {
-      max-width: none;
+    .life-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 150px;
+      gap: 12px;
+    }
+
+    .life-photo.big {
+      grid-row: span 2;
+    }
+
+    .offer-photo {
+      min-height: 260px;
     }
 
     .stats .container {
@@ -968,6 +1019,26 @@
     </div>
   </section>
 
+  <!-- LIFE AT BUILD IT UP -->
+  <section class="section" id="life">
+    <div class="container">
+      <div class="section-head left">
+        <div>
+          <span class="eyebrow">Life at Build It Up</span>
+          <h2>Hackathons, company visits and plenty of aperitivos</h2>
+        </div>
+        <a href="events.html" class="see-more">See all events <span>→</span></a>
+      </div>
+      <div class="life-grid">
+        <div class="life-photo big"><img src="assets/img/events/15-wave-by-vento-team.jpg" alt="The Build It Up team at Wave by Vento" loading="lazy"></div>
+        <div class="life-photo"><img src="assets/img/events/10-bcg-milan-visit.jpg" alt="Build It Up members visiting BCG in Milan" loading="lazy"></div>
+        <div class="life-photo"><img src="assets/img/events/09-360-capital-workshop.jpg" alt="Workshop with 360 Capital" loading="lazy"></div>
+        <div class="life-photo"><img src="assets/img/events/18-group-aperitivo.jpg" alt="Group aperitivo with the Build It Up community" loading="lazy"></div>
+        <div class="life-photo"><img src="assets/img/events/08-buildup-keynote-stage.png" alt="Build It Up keynote on stage" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- COSA OFFRIAMO -->
   <section class="section offwhite" id="offer">
     <div class="container">
@@ -1002,6 +1073,7 @@
           <h3>Outreach</h3>
           <p>Lead generation and outreach to identify new opportunities for the sales process.</p>
         </div>
+        <div class="offer-photo"><img src="assets/img/events/06-hackathon-team-working.png" alt="Build It Up students working together at a hackathon" loading="lazy"></div>
       </div>
     </div>
   </section>
