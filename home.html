@@ -436,20 +436,9 @@
     box-shadow: 0 4px 24px rgba(0,0,0,0.05);
   }
 
-  .offer-photo {
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    position: relative;
-    min-height: 300px;
-  }
-
-  .offer-photo img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 78%;
+  .offer-card:last-child {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 12px);
   }
 
   /* Life at Build It Up: photo mosaic */
@@ -583,9 +572,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 16px;
-    min-height: 132px;
     padding: 24px 16px 20px;
     background: var(--bu-white);
     border: 1px solid var(--bu-border);
@@ -608,6 +596,9 @@
   }
 
   .batch-tile-sector {
+    /* room for two lines, so the first line of every label sits at the same height */
+    min-height: 2.9em;
+    line-height: 1.45;
     color: var(--bu-gray-muted);
     font-size: 0.75rem;
     font-weight: 600;
@@ -914,8 +905,8 @@
       grid-row: span 2;
     }
 
-    .offer-photo {
-      min-height: 260px;
+    .offer-card:last-child {
+      max-width: none;
     }
 
     .stats .container {
@@ -1073,7 +1064,6 @@
           <h3>Outreach</h3>
           <p>Lead generation and outreach to identify new opportunities for the sales process.</p>
         </div>
-        <div class="offer-photo"><img src="assets/img/events/06-hackathon-team-working.png" alt="Build It Up students working together at a hackathon" loading="lazy"></div>
       </div>
     </div>
   </section>
@@ -1091,7 +1081,7 @@
       <div class="batch-strip">
         <div class="batch-tile">
           <div class="batch-tile-logo"><img src="assets/img/batch/pillar.png" alt="Pillar logo"></div>
-          <span class="batch-tile-sector">Workflow automation</span>
+          <span class="batch-tile-sector">Workflow<br>automation</span>
         </div>
         <div class="batch-tile">
           <div class="batch-tile-logo"><img src="assets/img/batch/iusful.png" alt="ius·ful logo"></div>
@@ -1107,7 +1097,7 @@
         </div>
         <div class="batch-tile">
           <div class="batch-tile-logo"><img src="assets/img/batch/stealth.png" alt="Stealth healthtech startup logo"></div>
-          <span class="batch-tile-sector">Healthtech · In stealth</span>
+          <span class="batch-tile-sector">Healthtech<br>In stealth</span>
         </div>
       </div>
     </div>
