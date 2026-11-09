@@ -770,7 +770,19 @@
     }
   }
 
+  .sr-only { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
   /* ===== Events timeline ===== */
+  #timeline {
+    position: relative;
+    overflow-x: clip;
+    background-color: var(--bu-offwhite);
+    background-image:
+      radial-gradient(620px 320px at 8% 2%, rgba(0, 125, 98, 0.12), transparent 70%),
+      radial-gradient(520px 300px at 96% 10%, rgba(0, 125, 98, 0.08), transparent 70%),
+      radial-gradient(560px 320px at 90% 78%, rgba(0, 125, 98, 0.07), transparent 70%);
+  }
+
   .timeline-lead {
     margin-top: 18px;
     color: var(--bu-gray-text);
@@ -778,13 +790,13 @@
     line-height: 1.6;
   }
 
-  /* "Next event" pill + filters */
+  /* Toolbar: next-event pill, filters, month navigation */
   .tl-toolbar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
-    margin: -20px auto 44px;
+    gap: 16px;
+    margin: -20px auto 36px;
   }
 
   .tl-next {
@@ -797,10 +809,10 @@
     border-radius: var(--radius-pill);
     font-size: 0.92rem;
     color: var(--bu-black);
+    box-shadow: 0 6px 18px rgba(0, 125, 98, 0.12);
   }
 
   .tl-next[hidden] { display: none; }
-
   .tl-next b { color: var(--bu-green); font-weight: 700; }
 
   .tl-next-dot {
@@ -842,9 +854,64 @@
   }
 
   .tl-filter:focus-visible,
-  .tl-toggle:focus-visible {
+  .tl-toggle:focus-visible,
+  .tl-month:focus-visible,
+  .tl-social:focus-visible {
     outline: 3px solid var(--bu-green);
     outline-offset: 2px;
+  }
+
+  /* Month navigation: sticks under the site header while you scroll the timeline */
+  .tl-months-wrap {
+    position: sticky;
+    top: 80px;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 36px;
+    pointer-events: none;
+  }
+
+  .tl-months {
+    pointer-events: auto;
+    display: inline-flex;
+    gap: 4px;
+    max-width: 100%;
+    padding: 5px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    background: rgba(255, 255, 255, 0.92);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--bu-border);
+    border-radius: var(--radius-pill);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+  }
+
+  .tl-months::-webkit-scrollbar { display: none; }
+
+  .tl-month {
+    appearance: none;
+    flex: 0 0 auto;
+    border: 0;
+    background: transparent;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--bu-gray-text);
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+  }
+
+  .tl-month:hover { color: var(--bu-black); transform: translateY(-1px); }
+  .tl-month[hidden] { display: none; }
+
+  .tl-month.is-active {
+    background: var(--bu-black);
+    color: var(--bu-white);
   }
 
   .tl-empty {
@@ -860,14 +927,43 @@
 
   .tl-empty[hidden] { display: none; }
 
-  .timeline {
-    list-style: none;
+  /* The timeline itself */
+  .tl-wrap {
+    position: relative;
     max-width: 920px;
     margin: 0 auto;
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
     padding: 0;
   }
 
+  /* One continuous line (base + coloured fill that grows while you scroll) */
+  .tl-line {
+    position: absolute;
+    left: 191px;
+    top: 0;
+    width: 3px;
+    height: 0;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+  }
+
+  .tl-line-fill {
+    display: block;
+    width: 100%;
+    height: 0;
+    border-radius: 3px;
+    background: linear-gradient(to bottom, var(--bu-green), #1fa383) no-repeat;
+    background-size: 100% var(--line-h, 100%);
+  }
+
   .tl-item {
+    --ev: var(--bu-green);
+    --ev-soft: var(--bu-green-mint);
     display: grid;
     grid-template-columns: 150px 44px minmax(0, 1fr);
     column-gap: 20px;
@@ -876,37 +972,45 @@
 
   .tl-item[hidden] { display: none; }
 
+  /* Reveal on scroll */
+  #timeline.tl-js .tl-item {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.2, .7, .2, 1);
+  }
+
+  #timeline.tl-js .tl-item.in {
+    opacity: 1;
+    transform: none;
+  }
+
   .tl-date {
     padding-top: 26px;
     text-align: right;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 1.05rem;
     line-height: 1.45;
-    color: var(--bu-red);
+    color: var(--ev);
   }
 
   .tl-date span { display: block; }
+
+  .tl-tbc {
+    display: block;
+    margin-top: 2px;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: var(--bu-gray-text);
+  }
+
+  .tl-facts dd em { font-weight: 500; color: var(--bu-gray-text); }
 
   .tl-rail {
     position: relative;
     display: flex;
     justify-content: center;
   }
-
-  .tl-rail::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 2px;
-    transform: translateX(-50%);
-    background: var(--bu-green);
-    opacity: 0.35;
-  }
-
-  .tl-item.is-first .tl-rail::before { top: 36px; }
-  .tl-item.is-last .tl-rail::before { bottom: calc(100% - 36px); }
 
   .tl-dot {
     position: relative;
@@ -915,39 +1019,55 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: var(--bu-green);
+    background: var(--ev);
     border: 3px solid var(--bu-offwhite);
-    box-shadow: 0 0 0 2px var(--bu-green);
+    box-shadow: 0 0 0 2px var(--ev);
     box-sizing: content-box;
+    transition: background 0.4s, box-shadow 0.4s, transform 0.4s;
   }
 
   .tl-item.tbc .tl-dot { background: var(--bu-offwhite); }
 
+  /* before the line reaches a dot it stays grey */
+  #timeline.tl-js .tl-dot:not(.reached) {
+    background: var(--bu-offwhite);
+    box-shadow: 0 0 0 2px #c9ceca;
+  }
+
+  #timeline.tl-js .tl-dot.reached { transform: scale(1.15); }
+  #timeline.tl-js .tl-item.tbc .tl-dot.reached { background: var(--bu-offwhite); }
+
   .tl-item.next .tl-dot { animation: tl-pulse 2s ease-out infinite; }
 
   @keyframes tl-pulse {
-    0%   { box-shadow: 0 0 0 2px var(--bu-green), 0 0 0 2px rgba(0,125,98,0.45); }
-    100% { box-shadow: 0 0 0 2px var(--bu-green), 0 0 0 14px rgba(0,125,98,0); }
+    0%   { box-shadow: 0 0 0 2px var(--ev, var(--bu-green)), 0 0 0 2px rgba(0,125,98,0.45); }
+    100% { box-shadow: 0 0 0 2px var(--ev, var(--bu-green)), 0 0 0 14px rgba(0,125,98,0); }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .tl-item.next .tl-dot,
-    .tl-next-dot { animation: none; }
-  }
-
+  /* Event cards */
   .tl-card {
+    position: relative;
     margin: 0 0 24px;
     padding: 24px 28px;
     background: var(--bu-white);
     border: 1px solid var(--bu-border);
+    border-top: 4px solid var(--ev);
     border-radius: var(--radius-md);
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
   }
 
-  .tl-item.past .tl-card { border-color: var(--bu-green); }
+  .tl-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.09);
+  }
 
-  .tl-card.is-open {
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  .tl-card.is-open { box-shadow: 0 14px 38px rgba(0, 0, 0, 0.09); }
+
+  .tl-item.flash .tl-card { animation: tl-flash 1.4s ease; }
+
+  @keyframes tl-flash {
+    0%, 100% { box-shadow: 0 0 0 0 transparent; }
+    30%      { box-shadow: 0 0 0 6px var(--ev-soft), 0 14px 34px rgba(0,0,0,0.1); }
   }
 
   #timeline.tl-js .tl-head,
@@ -964,16 +1084,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--bu-green-mint);
-    color: var(--bu-green);
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: var(--ev-soft);
+    color: var(--ev);
+    transition: transform 0.3s ease, background 0.3s, color 0.3s;
+  }
+
+  .tl-card:hover .tl-icon {
+    background: var(--ev);
+    color: var(--bu-white);
+    transform: rotate(-6deg) scale(1.06);
   }
 
   .tl-icon svg {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     fill: none;
     stroke: currentColor;
     stroke-width: 1.8;
@@ -1007,8 +1134,8 @@
     text-transform: uppercase;
   }
 
-  .tl-item.next .tl-badge { background: var(--bu-green); color: var(--bu-white); }
-  .tl-item.past .tl-badge { background: var(--bu-green-mint); color: var(--bu-green); }
+  .tl-item.next .tl-badge { background: var(--ev); color: var(--bu-white); }
+  .tl-item.past .tl-badge { background: var(--ev-soft); color: var(--ev); }
 
   .tl-desc {
     margin: 16px 0 0;
@@ -1017,7 +1144,6 @@
     line-height: 1.6;
   }
 
-  /* "More details" button */
   .tl-toggle {
     display: none;
     align-items: center;
@@ -1029,7 +1155,7 @@
     font: inherit;
     font-size: 0.92rem;
     font-weight: 700;
-    color: var(--bu-green);
+    color: var(--ev);
     cursor: pointer;
   }
 
@@ -1048,24 +1174,20 @@
 
   .tl-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
 
-  /* Expandable panel: animates between 0 and its natural height */
   #timeline.tl-js .tl-more {
     display: grid;
     grid-template-rows: 0fr;
     visibility: hidden;
-    transition: grid-template-rows 0.35s ease, visibility 0s linear 0.35s;
+    transition: grid-template-rows 0.4s ease, visibility 0s linear 0.4s;
   }
 
   #timeline.tl-js .tl-card.is-open .tl-more {
     grid-template-rows: 1fr;
     visibility: visible;
-    transition: grid-template-rows 0.35s ease, visibility 0s;
+    transition: grid-template-rows 0.4s ease, visibility 0s;
   }
 
-  .tl-more-inner {
-    min-height: 0;
-    overflow: hidden;
-  }
+  .tl-more-inner { min-height: 0; overflow: hidden; }
 
   .tl-more-body {
     margin-top: 20px;
@@ -1073,19 +1195,113 @@
     border-top: 1px solid var(--bu-border);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    #timeline.tl-js .tl-more,
-    #timeline.tl-js .tl-card.is-open .tl-more { transition: none; }
-    .tl-toggle svg { transition: none; }
-  }
-
   .tl-text {
-    margin: 0 0 18px;
+    margin: 0 0 22px;
     color: var(--bu-black);
     font-size: 1rem;
     line-height: 1.65;
   }
 
+  .tl-label {
+    margin: 0 0 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bu-gray-muted);
+  }
+
+  .tl-block { margin-bottom: 22px; }
+  .tl-block:last-child { margin-bottom: 0; }
+
+  /* Speakers */
+  .tl-people {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .tl-person {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px 10px 10px;
+    background: var(--ev-soft);
+    border-radius: 16px;
+    transition: transform 0.2s ease;
+  }
+
+  .tl-person:hover { transform: translateY(-2px); }
+
+  .tl-avatar {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--ev);
+    color: var(--bu-white);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+
+  .tl-person-name { margin: 0; font-weight: 700; font-size: 0.98rem; line-height: 1.2; }
+  .tl-person-role { margin: 2px 0 0; font-size: 0.82rem; color: var(--bu-gray-text); }
+
+  .tl-social {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    margin-left: 6px;
+    border-radius: 10px;
+    background: #0A66C2;
+    color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .tl-social:hover { transform: translateY(-2px) scale(1.06); box-shadow: 0 6px 14px rgba(10,102,194,0.35); }
+  .tl-social svg { width: 18px; height: 18px; fill: currentColor; }
+
+  /* Partners and hosts */
+  .tl-partners { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  .tl-partner {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px 8px 8px;
+    background: var(--bu-white);
+    border: 1px solid var(--bu-border);
+    border-radius: var(--radius-pill);
+    font-size: 0.92rem;
+    font-weight: 700;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .tl-partner:hover { border-color: var(--ev); transform: translateY(-2px); }
+
+  .tl-partner-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--ev-soft);
+    color: var(--ev);
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  .tl-partner img { height: 26px; width: auto; max-width: 110px; object-fit: contain; }
+
+  /* Key facts */
   .tl-facts {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -1103,31 +1319,22 @@
     color: var(--bu-gray-muted);
   }
 
-  .tl-facts dd {
-    margin: 4px 0 0;
-    font-size: 0.98rem;
-    font-weight: 600;
-  }
+  .tl-facts dd { margin: 4px 0 0; font-size: 0.98rem; font-weight: 600; }
 
   .tl-link {
     display: inline-block;
-    margin-top: 18px;
+    margin-top: 6px;
     font-size: 0.92rem;
     font-weight: 700;
-    color: var(--bu-green);
+    color: var(--ev);
     text-decoration: none;
-    border-bottom: 2px solid var(--bu-green-mint-dark);
+    border-bottom: 2px solid var(--ev-soft);
   }
 
-  .tl-link:hover { border-bottom-color: var(--bu-green); }
+  .tl-link:hover { border-bottom-color: var(--ev); }
+  .tl-link-inline { color: var(--ev); font-weight: 700; }
 
-  .tl-link-inline { color: var(--bu-green); font-weight: 700; }
-
-  .tl-photos {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-  }
+  .tl-photos { display: flex; gap: 12px; }
 
   .tl-photos img {
     height: 240px;
@@ -1146,13 +1353,13 @@
     max-width: 920px;
     margin: 16px auto 0;
     padding: 24px 28px;
-    background: var(--bu-black);
+    background: linear-gradient(120deg, #000 0%, #0b3d33 100%);
     color: var(--bu-white);
     border-radius: var(--radius-md);
   }
 
   .tl-monthly .tl-icon {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.12);
     color: var(--bu-white);
   }
 
@@ -1198,8 +1405,21 @@
 
   .tl-legend i.hollow { background: var(--bu-offwhite); }
 
+  @media (prefers-reduced-motion: reduce) {
+    #timeline.tl-js .tl-item { opacity: 1; transform: none; transition: none; }
+    .tl-item.next .tl-dot, .tl-next-dot { animation: none; }
+    #timeline.tl-js .tl-more,
+    #timeline.tl-js .tl-card.is-open .tl-more { transition: none; }
+    .tl-toggle svg, .tl-card, .tl-card:hover .tl-icon, .tl-icon { transition: none; }
+    .tl-card:hover { transform: none; }
+    .tl-item.flash .tl-card { animation: none; }
+  }
+
   @media (max-width: 720px) {
     .tl-toolbar { margin-top: -28px; }
+    .tl-months-wrap { top: 76px; }
+    .tl-month { padding: 8px 12px; }
+    .tl-line { left: 13px; }
 
     .tl-item {
       grid-template-columns: 28px minmax(0, 1fr);
@@ -1218,22 +1438,20 @@
     }
 
     .tl-rail { grid-column: 1; grid-row: 1 / span 2; }
-
     .tl-dot { margin-top: 4px; }
-    .tl-item.is-first .tl-rail::before { top: 14px; }
-    .tl-item.is-last .tl-rail::before { bottom: calc(100% - 14px); }
 
     .tl-card { grid-column: 2; grid-row: 2; padding: 20px; }
 
     .tl-head {
       display: grid;
-      grid-template-columns: 48px minmax(0, 1fr);
+      grid-template-columns: 52px minmax(0, 1fr);
       column-gap: 14px;
       row-gap: 10px;
       align-items: center;
     }
 
     .tl-badge { grid-column: 2; justify-self: start; margin-left: 0; }
+    .tl-person { width: 100%; }
     .tl-photos { flex-direction: column; }
     .tl-photos img { height: auto; width: 100%; flex: none; }
     .tl-photos img.wide { aspect-ratio: 4 / 3; }
@@ -1289,7 +1507,7 @@
   </section>
 
   <!-- EVENTS TIMELINE -->
-  <section class="section offwhite" id="timeline">
+  <section class="section" id="timeline">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Calendar 2026–2027</span>
@@ -1304,9 +1522,14 @@
           <button class="tl-filter" type="button" data-filter="past" aria-pressed="false">Past</button>
         </div>
       </div>
+      <div class="tl-months-wrap" id="tl-months-wrap">
+        <nav class="tl-months" id="tl-months" aria-label="Jump to a month"><button class="tl-month" type="button" data-month="11">Nov</button><button class="tl-month" type="button" data-month="1">Jan</button><button class="tl-month" type="button" data-month="2">Feb</button><button class="tl-month" type="button" data-month="3">Mar</button><button class="tl-month" type="button" data-month="6">Jun</button></nav>
+      </div>
+      <div class="tl-wrap" id="tl-wrap">
+      <span class="tl-line" id="tl-line" aria-hidden="true"><span class="tl-line-fill" id="tl-line-fill"></span></span>
       <ol class="timeline" id="tl-list">
-        <li class="tl-item past is-first" data-start="2026-11-04" data-end="2026-11-04">
-          <div class="tl-date"><span>Nov 4</span></div>
+        <li class="tl-item past" data-months="11" data-start="2026-11-04" data-end="2026-11-04">
+          <div class="tl-date"><span>Nov 4, 2026</span></div>
           <div class="tl-rail"><span class="tl-dot"></span></div>
           <div class="tl-card" data-open="true">
             <div class="tl-head">
@@ -1324,19 +1547,33 @@
             <div class="tl-more" id="tl-more-startup-for-beginners">
               <div class="tl-more-inner">
                 <div class="tl-more-body">
-                  <p class="tl-text">Build It Up presented the services it can provide to startups. Sebastiano Andreis of Navis AI then gave a talk on the changes of direction a startup goes through along its journey.</p>
-                  <dl class="tl-facts"><div><dt>Where</dt><dd>OGR Tech, Turin</dd></div><div><dt>Organised with</dt><dd>Talent Garden</dd></div><div><dt>Speaker</dt><dd>Sebastiano Andreis, Navis AI</dd></div></dl>
-              <div class="tl-photos">
-                <img class="wide" src="assets/img/events/19-startup-for-beginners-audience.jpg" alt="The audience at Startup for Beginners at OGR Tech in Turin" loading="lazy">
-                <img class="tall" src="assets/img/events/20-startup-for-beginners-talk.jpg" alt="A Build It Up member presenting the network at Startup for Beginners" loading="lazy">
-              </div>
+                  <p class="tl-text">Build It Up presented the services it can provide to startups. Sebastiano Andreis of Navisio AI then gave a talk on the changes of direction a startup goes through along its journey.</p>
+                  <div class="tl-block">
+                    <p class="tl-label">Speaker</p>
+                    <div class="tl-people">
+                      <div class="tl-person">
+                        <span class="tl-avatar" aria-hidden="true">SA</span>
+                        <div><p class="tl-person-name">Sebastiano Andreis</p><p class="tl-person-role">Navisio AI</p></div>
+                        <a class="tl-social" href="https://www.linkedin.com/in/sebastiano-andreis-214688189/" target="_blank" rel="noopener noreferrer" aria-label="Sebastiano Andreis on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tl-block">
+                    <p class="tl-label">Venue and partners</p>
+                    <div class="tl-partners"><span class="tl-partner"><span class="tl-partner-mark" aria-hidden="true">O</span>OGR Tech<span class="sr-only"> (Venue)</span></span><span class="tl-partner"><span class="tl-partner-mark" aria-hidden="true">T</span>Talent Garden<span class="sr-only"> (Organised with)</span></span></div>
+                  </div>
+                  <div class="tl-block"><dl class="tl-facts"><div><dt>Where</dt><dd>OGR Tech, Turin</dd></div><div><dt>When</dt><dd>November 4, 2026</dd></div></dl></div>
+                  <div class="tl-block tl-photos">
+                    <img class="wide" src="assets/img/events/19-startup-for-beginners-audience.jpg" alt="The audience at Startup for Beginners at OGR Tech in Turin" loading="lazy">
+                    <img class="tall" src="assets/img/events/20-startup-for-beginners-talk.jpg" alt="A Build It Up member presenting the network at Startup for Beginners" loading="lazy">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </li>
-        <li class="tl-item" data-start="2026-11-10" data-end="2026-11-10">
-          <div class="tl-date"><span>Nov 10</span></div>
+        <li class="tl-item" data-months="11" data-start="2026-11-10" data-end="2026-11-10">
+          <div class="tl-date"><span>Nov 10, 2026</span></div>
           <div class="tl-rail"><span class="tl-dot"></span></div>
           <div class="tl-card">
             <div class="tl-head">
@@ -1355,14 +1592,24 @@
               <div class="tl-more-inner">
                 <div class="tl-more-body">
                   <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
-                  <dl class="tl-facts"><div><dt>Where</dt><dd>Online</dd></div><div><dt>Speaker</dt><dd>Matteo Monge</dd></div><div><dt>Series</dt><dd>BIU Labs</dd></div></dl>
+                  <div class="tl-block">
+                    <p class="tl-label">Speaker</p>
+                    <div class="tl-people">
+                      <div class="tl-person">
+                        <span class="tl-avatar" aria-hidden="true">MM</span>
+                        <div><p class="tl-person-name">Matteo Monge</p><p class="tl-person-role">Speaker</p></div>
+                        <a class="tl-social" href="https://www.linkedin.com/in/matteo-monge" target="_blank" rel="noopener noreferrer" aria-label="Matteo Monge on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tl-block"><dl class="tl-facts"><div><dt>Where</dt><dd>Online</dd></div><div><dt>When</dt><dd>November 10, 2026</dd></div><div><dt>Series</dt><dd>BIU Labs</dd></div></dl></div>
                 </div>
               </div>
             </div>
           </div>
         </li>
-        <li class="tl-item tbc">
-          <div class="tl-date"><span>Jan 15</span><span>Feb 15</span></div>
+        <li class="tl-item tbc" data-months="1 2">
+          <div class="tl-date"><span>Jan – Feb 2027</span><em class="tl-tbc">to be confirmed</em></div>
           <div class="tl-rail"><span class="tl-dot"></span></div>
           <div class="tl-card">
             <div class="tl-head">
@@ -1373,7 +1620,7 @@
               </div>
               <span class="tl-badge">Upcoming</span>
             </div>
-            <p class="tl-desc">Two dates in Turin, still to be confirmed.</p>
+            <p class="tl-desc">In Turin. Dates to be confirmed.</p>
             <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-club-investitori">
               <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -1381,14 +1628,14 @@
               <div class="tl-more-inner">
                 <div class="tl-more-body">
                   <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
-                  <dl class="tl-facts"><div><dt>Where</dt><dd>Turin</dd></div><div><dt>Dates</dt><dd>Jan 15 and Feb 15 (to be confirmed)</dd></div></dl>
+                  <div class="tl-block"><dl class="tl-facts"><div><dt>Where</dt><dd>Turin</dd></div><div><dt>When</dt><dd>January – February 2027 <em>to be confirmed</em></dd></div></dl></div>
                 </div>
               </div>
             </div>
           </div>
         </li>
-        <li class="tl-item tbc">
-          <div class="tl-date"><span>Mar 4–5</span><span>Mar 18–19</span></div>
+        <li class="tl-item tbc" data-months="3">
+          <div class="tl-date"><span>March 2027</span><em class="tl-tbc">to be confirmed</em></div>
           <div class="tl-rail"><span class="tl-dot"></span></div>
           <div class="tl-card">
             <div class="tl-head">
@@ -1399,7 +1646,7 @@
               </div>
               <span class="tl-badge">Upcoming</span>
             </div>
-            <p class="tl-desc">Two dates in Milan, still to be confirmed.</p>
+            <p class="tl-desc">In Milan. Dates to be confirmed.</p>
             <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-trek">
               <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -1407,14 +1654,14 @@
               <div class="tl-more-inner">
                 <div class="tl-more-body">
                   <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
-                  <dl class="tl-facts"><div><dt>Where</dt><dd>Milan</dd></div><div><dt>Dates</dt><dd>Mar 4–5 and Mar 18–19 (to be confirmed)</dd></div></dl>
+                  <div class="tl-block"><dl class="tl-facts"><div><dt>Where</dt><dd>Milan</dd></div><div><dt>When</dt><dd>March 2027 <em>to be confirmed</em></dd></div></dl></div>
                 </div>
               </div>
             </div>
           </div>
         </li>
-        <li class="tl-item tbc">
-          <div class="tl-date"><span>Mar 6</span><span>Mar 20</span></div>
+        <li class="tl-item tbc" data-months="3">
+          <div class="tl-date"><span>March 2027</span><em class="tl-tbc">to be confirmed</em></div>
           <div class="tl-rail"><span class="tl-dot"></span></div>
           <div class="tl-card">
             <div class="tl-head">
@@ -1425,7 +1672,7 @@
               </div>
               <span class="tl-badge">Upcoming</span>
             </div>
-            <p class="tl-desc">Our hackathon returns, with dates still to be confirmed.</p>
+            <p class="tl-desc">Our hackathon returns in March 2027. Dates to be confirmed.</p>
             <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-hackathon">
               <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
@@ -1433,15 +1680,15 @@
               <div class="tl-more-inner">
                 <div class="tl-more-body">
                   <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
-                  <dl class="tl-facts"><div><dt>Where</dt><dd>Turin</dd></div><div><dt>Dates</dt><dd>Mar 6 and Mar 20 (to be confirmed)</dd></div></dl>
-              <a class="tl-link" href="#hackathon">See our first hackathon →</a>
+                  <div class="tl-block"><dl class="tl-facts"><div><dt>Where</dt><dd>Turin</dd></div><div><dt>When</dt><dd>March 2027 <em>to be confirmed</em></dd></div></dl>
+                    <a class="tl-link" href="#hackathon">See our first hackathon →</a></div>
                 </div>
               </div>
             </div>
           </div>
         </li>
-        <li class="tl-item is-last">
-          <div class="tl-date"><span>June</span></div>
+        <li class="tl-item" data-months="6">
+          <div class="tl-date"><span>June 2027</span></div>
           <div class="tl-rail"><span class="tl-dot"></span></div>
           <div class="tl-card">
             <div class="tl-head">
@@ -1460,13 +1707,14 @@
               <div class="tl-more-inner">
                 <div class="tl-more-body">
                   <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
-                  <dl class="tl-facts"><div><dt>When</dt><dd>June</dd></div><div><dt>Where</dt><dd>To be defined</dd></div></dl>
+                  <div class="tl-block"><dl class="tl-facts"><div><dt>When</dt><dd>June 2027</dd></div><div><dt>Where</dt><dd>To be defined</dd></div></dl></div>
                 </div>
               </div>
             </div>
           </div>
         </li>
       </ol>
+      </div>
       <p class="tl-empty" id="tl-empty" hidden>Nothing here yet.</p>
       <div class="tl-monthly">
         <span class="tl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></span>
@@ -1803,13 +2051,17 @@
   </script>
 
   <script>
-    // Events timeline: expandable cards, filters, "next event" pill
+    // Events timeline: expandable cards, filters, month navigation, scroll effects
     (function () {
       var root = document.getElementById('timeline');
       if (!root) return;
       root.classList.add('tl-js');
 
+      var list = document.getElementById('tl-wrap');
+      var line = document.getElementById('tl-line');
+      var lineFill = document.getElementById('tl-line-fill');
       var items = Array.prototype.slice.call(root.querySelectorAll('.tl-item'));
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var today = new Date();
       today.setHours(0, 0, 0, 0);
 
@@ -1818,11 +2070,11 @@
         return new Date(+p[0], +p[1] - 1, +p[2]);
       }
 
-      function setBadge(li, label) {
-        li.querySelector('.tl-badge').textContent = label;
+      function visibleItems() {
+        return items.filter(function (li) { return !li.hidden; });
       }
 
-      // 1) Work out which events are past / next, so the page updates itself over time
+      // 1) Past / next, computed from today's date so the page updates itself
       var next = null;
       items.forEach(function (li) {
         var end = li.getAttribute('data-end');
@@ -1830,20 +2082,19 @@
         if (parse(end) < today) {
           li.classList.remove('next');
           li.classList.add('past');
-          setBadge(li, 'Past');
+          li.querySelector('.tl-badge').textContent = 'Past';
         } else if (!next || parse(li.getAttribute('data-start')) < parse(next.getAttribute('data-start'))) {
           next = li;
         }
       });
       if (next) {
         next.classList.add('next');
-        setBadge(next, 'Next up');
+        next.querySelector('.tl-badge').textContent = 'Next up';
         var days = Math.round((parse(next.getAttribute('data-start')) - today) / 86400000);
         var when = days <= 0 ? 'today' : days === 1 ? 'tomorrow' : 'in ' + days + ' days';
-        var pill = document.getElementById('tl-next');
         document.getElementById('tl-next-text').innerHTML =
           'Next event: <b>' + next.querySelector('.tl-title').textContent + '</b> · ' + when;
-        pill.hidden = false;
+        document.getElementById('tl-next').hidden = false;
       }
 
       // 2) Expandable cards (one open at a time)
@@ -1859,34 +2110,84 @@
       var cards = Array.prototype.slice.call(root.querySelectorAll('.tl-card'));
       cards.forEach(function (card) {
         setOpen(card, card.getAttribute('data-open') === 'true');
-        function toggle() {
+        function toggle(e) {
+          if (e && e.target.closest && e.target.closest('a')) return;
           var willOpen = !card.classList.contains('is-open');
           cards.forEach(function (c) { if (c !== card) setOpen(c, false); });
           setOpen(card, willOpen);
+          // heights change while the panel animates: keep the line in sync
+          var t0 = Date.now();
+          (function tick() { layout(); if (Date.now() - t0 < 500) requestAnimationFrame(tick); })();
         }
         card.querySelector('.tl-toggle').addEventListener('click', toggle);
         card.querySelector('.tl-head').addEventListener('click', toggle);
         card.querySelector('.tl-desc').addEventListener('click', toggle);
       });
 
-      // 3) Filters
+      // 3) Line geometry and fill
+      var dots = items.map(function (li) { return li.querySelector('.tl-dot'); });
+
+      function layout() {
+        var vis = visibleItems();
+        if (!vis.length) { line.style.height = '0px'; return; }
+        var base = list.getBoundingClientRect().top + window.pageYOffset;
+        var first = vis[0].querySelector('.tl-dot').getBoundingClientRect();
+        var last = vis[vis.length - 1].querySelector('.tl-dot').getBoundingClientRect();
+        var top = first.top + window.pageYOffset + first.height / 2 - base;
+        var bottom = last.top + window.pageYOffset + last.height / 2 - base;
+        line.style.top = top + 'px';
+        line.style.height = Math.max(bottom - top, 0) + 'px';
+        line.style.setProperty('--line-h', Math.max(bottom - top, 0) + 'px');
+        updateFill();
+      }
+
+      function updateFill() {
+        var rect = line.getBoundingClientRect();
+        var mid = window.innerHeight * 0.55;
+        var filled = Math.min(Math.max(mid - rect.top, 0), rect.height);
+        lineFill.style.height = filled + 'px';
+        items.forEach(function (li, i) {
+          if (li.hidden) return;
+          var d = dots[i].getBoundingClientRect();
+          dots[i].classList.toggle('reached', d.top + d.height / 2 <= mid);
+        });
+      }
+
+      // 4) Reveal on scroll
+      var io = null;
+      if ('IntersectionObserver' in window && !reduce) {
+        io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        items.forEach(function (li) { io.observe(li); });
+      } else {
+        items.forEach(function (li) { li.classList.add('in'); });
+      }
+
+      // 5) Filters
       var filters = Array.prototype.slice.call(root.querySelectorAll('.tl-filter'));
       var empty = document.getElementById('tl-empty');
+      var monthBtns = Array.prototype.slice.call(root.querySelectorAll('.tl-month'));
+
+      function monthsOf(li) { return li.getAttribute('data-months').split(' '); }
 
       function applyFilter(kind) {
-        var visible = [];
         items.forEach(function (li) {
           var isPast = li.classList.contains('past');
-          var show = kind === 'all' || (kind === 'past' && isPast) || (kind === 'upcoming' && !isPast);
-          li.hidden = !show;
-          li.classList.remove('is-first', 'is-last');
-          if (show) visible.push(li);
+          li.hidden = !(kind === 'all' || (kind === 'past' && isPast) || (kind === 'upcoming' && !isPast));
+          if (!li.hidden) li.classList.add('in');
         });
-        if (visible.length) {
-          visible[0].classList.add('is-first');
-          visible[visible.length - 1].classList.add('is-last');
-        }
-        empty.hidden = visible.length > 0;
+        var vis = visibleItems();
+        empty.hidden = vis.length > 0;
+        monthBtns.forEach(function (b) {
+          var m = b.getAttribute('data-month');
+          b.hidden = !vis.some(function (li) { return monthsOf(li).indexOf(m) !== -1; });
+        });
+        document.getElementById('tl-months-wrap').hidden = !vis.length;
+        layout();
+        spy();
       }
 
       filters.forEach(function (btn) {
@@ -1895,7 +2196,55 @@
           applyFilter(btn.getAttribute('data-filter'));
         });
       });
+
+      // 6) Month navigation (click to jump, highlights while you scroll)
+      monthBtns.forEach(function (b) {
+        b.addEventListener('click', function () {
+          var m = b.getAttribute('data-month');
+          var target = visibleItems().filter(function (li) { return monthsOf(li).indexOf(m) !== -1; })[0];
+          if (!target) return;
+          var y = target.getBoundingClientRect().top + window.pageYOffset - 170;
+          window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+          target.classList.remove('flash');
+          void target.offsetWidth;
+          target.classList.add('flash');
+          setTimeout(function () { target.classList.remove('flash'); }, 1500);
+        });
+      });
+
+      function spy() {
+        var mid = window.innerHeight * 0.45;
+        var current = null;
+        visibleItems().forEach(function (li) {
+          if (li.getBoundingClientRect().top <= mid) current = li;
+        });
+        if (!current) current = visibleItems()[0];
+        var m = current ? monthsOf(current) : [];
+        var active = null;
+        monthBtns.forEach(function (b) {
+          if (b.hidden) return;
+          var on = m.indexOf(b.getAttribute('data-month')) !== -1;
+          if (on && !active) active = b;
+        });
+        monthBtns.forEach(function (b) { b.classList.toggle('is-active', b === active); });
+        if (active && active.scrollIntoView && active.parentNode.scrollWidth > active.parentNode.clientWidth) {
+          var nav = active.parentNode;
+          nav.scrollLeft = active.offsetLeft - nav.clientWidth / 2 + active.offsetWidth / 2;
+        }
+      }
+
+      var ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () { updateFill(); spy(); ticking = false; });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', function () { layout(); spy(); });
+      window.addEventListener('load', layout);
+
       applyFilter('all');
+      layout();
     })();
   </script>
 
