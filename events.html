@@ -1348,6 +1348,9 @@
   }
 
   .tl-photos img.wide { flex: 1.6 1 0; }
+  .tl-photos img.poster { flex: 1 1 100%; height: auto; aspect-ratio: 16 / 9; }
+  .tl-avatar { overflow: hidden; }
+  .tl-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .tl-photos img.tall { flex: 1 1 0; object-position: center 30%; }
 
   .tl-monthly {
@@ -1422,7 +1425,7 @@
   @media (max-width: 720px) {
     .tl-toolbar { margin-top: -28px; }
     .tl-months-wrap { top: 76px; }
-    .tl-month { padding: 8px 12px; }
+    .tl-month { padding: 8px 8px; font-size: 0.8rem; }
     .tl-line { left: 13px; }
 
     .tl-item {
@@ -1527,7 +1530,7 @@
         </div>
       </div>
       <div class="tl-months-wrap" id="tl-months-wrap">
-        <nav class="tl-months" id="tl-months" aria-label="Jump to a month"><button class="tl-month" type="button" data-month="11">Nov</button><button class="tl-month" type="button" data-month="1">Jan</button><button class="tl-month" type="button" data-month="2">Feb</button><button class="tl-month" type="button" data-month="3">Mar</button><button class="tl-month" type="button" data-month="6">Jun</button></nav>
+        <nav class="tl-months" id="tl-months" aria-label="Jump to a month"><button class="tl-month" type="button" data-month="11">Nov</button><button class="tl-month" type="button" data-month="12">Dec</button><button class="tl-month" type="button" data-month="1">Jan</button><button class="tl-month" type="button" data-month="2">Feb</button><button class="tl-month" type="button" data-month="3">Mar</button><button class="tl-month" type="button" data-month="6">Jun</button></nav>
       </div>
       <div class="tl-wrap" id="tl-wrap">
       <span class="tl-line" id="tl-line" aria-hidden="true"><span class="tl-line-fill" id="tl-line-fill"></span></span>
@@ -1588,25 +1591,54 @@
               </div>
               <span class="tl-badge">Upcoming</span>
             </div>
-            <p class="tl-desc">An online session with Matteo Monge, part of our BIU Labs.</p>
+            <p class="tl-desc">BIU Labs, Chapter 1: GTM School. A hands-on session with the person who builds a startup's go-to-market every day.</p>
             <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-gtm-school">
               <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
             <div class="tl-more" id="tl-more-gtm-school">
               <div class="tl-more-inner">
                 <div class="tl-more-body">
-                  <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
+                  <p class="tl-text">Chapter 1 of BIU Labs, titled “Inside a Startup's Go-To-Market”. Matteo Monge, Head of GTM at Cato AI, took us through how go-to-market is built day by day inside a startup.</p>
                   <div class="tl-block">
                     <p class="tl-label">Speaker</p>
                     <div class="tl-people">
                       <div class="tl-person">
                         <span class="tl-avatar" aria-hidden="true">MM</span>
-                        <div><p class="tl-person-name">Matteo Monge</p><p class="tl-person-role">Speaker</p></div>
+                        <div><p class="tl-person-name">Matteo Monge</p><p class="tl-person-role">Head of GTM at Cato AI</p></div>
                         <a class="tl-social" href="https://www.linkedin.com/in/matteo-monge" target="_blank" rel="noopener noreferrer" aria-label="Matteo Monge on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
                       </div>
                     </div>
                   </div>
                   <div class="tl-block"><dl class="tl-facts"><div><dt>Where</dt><dd>Online</dd></div><div><dt>When</dt><dd>November 10, 2026</dd></div><div><dt>Series</dt><dd>BIU Labs</dd></div></dl></div>
+                  <div class="tl-block tl-photos">
+                    <img class="poster" src="assets/img/events/21-gtm-school-poster.jpg" alt="Poster of BIU Labs Chapter 1: GTM School with Matteo Monge, Head of GTM at Cato AI" loading="lazy">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item" data-months="12" data-start="2026-12-22" data-end="2026-12-22">
+          <div class="tl-date"><span>Dec 22, 2026</span></div>
+          <div class="tl-rail"><span class="tl-dot"></span></div>
+          <div class="tl-card">
+            <div class="tl-head">
+              <span class="tl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+              <div>
+                <h3 class="tl-title">BIU Talk</h3>
+                <p class="tl-meta">Online</p>
+              </div>
+              <span class="tl-badge">Upcoming</span>
+            </div>
+            <p class="tl-desc">Our December BIU Talk, online.</p>
+            <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-biu-talk-dec">
+              <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="tl-more" id="tl-more-biu-talk-dec">
+              <div class="tl-more-inner">
+                <div class="tl-more-body">
+                  <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
+                  <div class="tl-block"><dl class="tl-facts"><div><dt>Where</dt><dd>Online</dd></div><div><dt>When</dt><dd>December 22, 2026</dd></div></dl></div>
                 </div>
               </div>
             </div>
@@ -1633,6 +1665,32 @@
                 <div class="tl-more-body">
                   <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
                   <div class="tl-block"><dl class="tl-facts"><div><dt>Where</dt><dd>Turin</dd></div><div><dt>When</dt><dd>January – February 2027 <em>to be confirmed</em></dd></div></dl></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="tl-item tbc" data-months="2">
+          <div class="tl-date"><span>February 2027</span><em class="tl-tbc">to be confirmed</em></div>
+          <div class="tl-rail"><span class="tl-dot"></span></div>
+          <div class="tl-card">
+            <div class="tl-head">
+              <span class="tl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/><line x1="14" y1="5" x2="10" y2="19"/></svg></span>
+              <div>
+                <h3 class="tl-title">BIU Labs – Vibe Coding</h3>
+                <p class="tl-meta">Online / Milan</p>
+              </div>
+              <span class="tl-badge">Upcoming</span>
+            </div>
+            <p class="tl-desc">BIU Labs, online or in Milan. Date to be confirmed.</p>
+            <button class="tl-toggle" type="button" aria-expanded="false" aria-controls="tl-more-biu-labs-vibe-coding">
+              <span class="tl-toggle-label">More details</span><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="tl-more" id="tl-more-biu-labs-vibe-coding">
+              <div class="tl-more-inner">
+                <div class="tl-more-body">
+                  <p class="tl-text">More details coming soon. Leave your email in <a class="tl-link-inline" href="home.html#newsletter">Stay in the loop</a> and we will keep you posted.</p>
+                  <div class="tl-block"><dl class="tl-facts"><div><dt>Where</dt><dd>Online / Milan</dd></div><div><dt>When</dt><dd>February 2027 <em class="tl-tbc">to be confirmed</em></dd></div><div><dt>Series</dt><dd>BIU Labs</dd></div></dl></div>
                 </div>
               </div>
             </div>
